@@ -1,0 +1,54 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="main-container" style="margin:3%;">
+        <div class="slds-grid slds-wrap slds-p-vertical_small">
+            <div class="slds-size_6-of-12 slds-p-horizontal_large">
+                <ui:outputText class="form-control slds-text-heading_large slds-p-top_xx-small logo" aura:id="accName" value="Product Details" />
+            </div>
+            <div class="slds-size_6-of-12 slds-text-align_right slds-p-horizontal_large">
+                <button class="slds-button slds-button_brand" onclick="{!c.saveAccountPlan}">Buy Now</button>
+            </div>
+        </div>
+        
+        <hr style="margin:2px"/>
+        <!--<force:recordView recordId="{!v.recordId}" type="FULL"/>-->
+        <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+            <div class="slds-p-around_medium slds-size_1-of-2 slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                100% Native General Ledger, Project Accounting  Enterprise Resource Planning application. Run your whole business from Salesforce. Get rid of the pain and suffering from broken sync tools and duplicate databases. Start Today!!
+            </div>
+            <div class="slds-size_1-of-2 slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                <div class="slds-p-around_medium">
+                    <div class="opportunities-card_inner-container slds-p-around_medium">
+                        <div class="opportunities-card_head slds-border_bottom slds-p-bottom_small">
+                            <span class="slds-icon_container">
+                                <c:svgIcons svgPath="/resource/assets/assets/icons/standard-sprite/svg/symbols.svg#case" category="standard" size="small" name="case" />
+                            </span>
+                            <span class="slds-text-heading_small slds-m-left_small slds-is-relative main-heading">Company Information</span>
+                        </div>
+                        
+                        <div class="slds-grid slds-wrap slds-p-bottom_small slds-border_bottom">
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Name</div>
+                                    <div class=""><ui:outputText value="PwC SDC" class="output"/></div>
+                                </div>
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Phone</div>
+                                    <div class=""><ui:outputText value="809-809-4322" class="output"/></div>
+                                </div>
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Email</div>
+                                    <div class=""><ui:outputText value="customer@pwc.com" class="output"/></div>
+                                </div>
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Website</div>
+                                    <div class=""><ui:outputText value="www.pwc.com" class="output"/></div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</aura:component>

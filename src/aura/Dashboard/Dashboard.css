@@ -1,0 +1,27 @@
+.THIS .dashboard-title {
+    margin-right: .5rem;
+    max-width: 100%;
+    font-size: 1.125rem;
+    font-weight:200;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: text;
+    position: relative;
+    top: 43px;
+    left: 10px;
+}
+.THIS .role-title {
+    text-transform: uppercase;
+    margin-right: .5rem;
+    max-width: 100%;
+    font-size: 0.6rem;
+    font-weight: bold;
+    line-height: 2.80;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: text;
+    position: relative;
+    top: 43px;
+    left: 10px;
+}

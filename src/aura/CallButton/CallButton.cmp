@@ -1,0 +1,18 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction">
+    <aura:attribute name="recordId" type="Id" />
+    
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <div class="modal-header slds-modal__header slds-modal__header--empty"></div>
+            <div class="slds-modal__content slds-p-around--medium">
+                <div class="slds-text-align--center call-buttons-container">
+                    <div><a href="tel:+1-968-632-2279" onclick='{!c.navigateToTask}'><button class="slds-button slds-button--neutral">Business Phone : 9686322279</button></a></div>
+                    <div class="slds-m-top--small"><button class="slds-button slds-button--neutral">Log without Calling</button></div>
+                    <div class="slds-m-top--small"><button class="slds-button slds-button--neutral">Cancel</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop--open"></div>
+    
+</aura:component>

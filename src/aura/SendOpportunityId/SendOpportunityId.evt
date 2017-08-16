@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Send Oppty Id">
+    <aura:attribute name="oppId" type="Id" description="Id of the selected record"/>
+</aura:event>

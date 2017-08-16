@@ -1,0 +1,17 @@
+<aura:component controller="ReportChartController" implements="flexipage:availableForAllPageTypes">
+    <ltng:require scripts="{!join(',', $Resource.assets + '/assets/scripts/highcharts.js', $Resource.assets + '/assets/scripts/jquery.min.js')}" afterScriptsLoaded="{!c.myAction}"/>
+
+
+
+    <div class="slds-grid slds-wrap">
+    	        
+        <div class="slds-size--6-of-12">
+            <div id="bar-chart1" style="min-width: 150px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        </div>
+        
+        <div class="slds-size--6-of-12">
+            <div id="bar-chart2" style="min-width: 150px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        </div>        
+    </div>
+    
+</aura:component>

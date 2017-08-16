@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Fired when new call note is created">
+    <aura:attribute name="needAnalysis" type="Customer_Need_Analysis__c[]" description=""/>
+</aura:event>

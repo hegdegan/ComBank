@@ -1,0 +1,47 @@
+<aura:component controller="RelatedListController" implements="flexipage:availableForAllPageTypes">
+    <ltng:require styles="{!$Resource.assets + '/assets/styles/lightning-design-system-ltng.css'}" />
+    <ltng:require scripts="{!$Resource.assets + '/assets/scripts/jquery.min.js'}"/>
+    <aura:attribute name="opportunities" type="Opportunity[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <style>
+    	.opportunities-card_container{background:#F2F6FA;}
+    </style>
+    <div class="slds-p-around_medium opportunities-card_container">
+        <div class="opportunities-card_inner-container slds-p-around_medium">
+            <div class="opportunities-card_head slds-border_bottom slds-p-bottom_small">
+                <span class="slds-icon_container">
+                    <c:svgIcons svgPath="/resource/assets/assets/icons/standard-sprite/svg/symbols.svg#case" category="standard" size="small" name="case" />
+                </span>
+                <span class="slds-text-heading_small slds-m-left_small slds-is-relative main-heading">Top opportunities</span>
+            </div>
+            
+            <aura:iteration items="{!v.opportunities}" var="opportunity">
+                <div class="slds-grid slds-wrap slds-p-bottom_small slds-border_bottom">
+                    <div class="slds-size_12-of-12 slds-m-top_small">
+                        <a href="{! '#/sObject/' + opportunity.Id + '/view'}">
+                            {!opportunity.Name}
+                        </a>
+                    </div>
+                    
+                    <div class="slds-size_6-of-12 slds-m-top_small">
+                        <div class="slds-text-title">Client</div>
+                        <div class=""><ui:outputText value="{!opportunity.Account.Name}" class="output"/></div>
+                    </div>
+                    <div class="slds-size_6-of-12 slds-m-top_small">
+                        <div class="slds-text-title">Close date</div>
+                        <div class=""><ui:outputText value="{!opportunity.CloseDate}" class="output"/></div>
+                    </div>
+                    <div class="slds-size_6-of-12 slds-m-top_small">
+                        <div class="slds-text-title">Amount</div>
+                        <div class="">$<ui:outputNumber value="{!opportunity.Amount__c}" class="output"/></div>
+                    </div>
+                    <div class="slds-size_6-of-12 slds-m-top_small">
+                        <div class="slds-text-title">Stage</div>
+                        <div class=""><ui:outputText value="{!opportunity.StageName}" class="output"/></div>
+                    </div>
+                </div>
+            </aura:iteration>
+        </div>
+    </div>
+</aura:component>

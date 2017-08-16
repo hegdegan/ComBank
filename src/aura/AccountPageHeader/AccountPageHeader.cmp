@@ -1,0 +1,134 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="accountDetails" type="AccountController.AccountWrapper"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="message-action--panel slds-hide" style="height:4rem;position:absolute;left:32%;top:-9px;">
+        <div class="slds-notify_container slds-is-relative">
+            <div class="slds-notify slds-notify_toast slds-theme_success" role="alert">
+                <span class="slds-assistive-text">success</span>
+                <span class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-no-flex slds-align-top">
+                    <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#success" category="utility" size="small" name="success" />
+                </span>
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_small ">Account
+                        <a href="javascript:void(0);">ACME - 100</a> widgets was created.
+                    </h2>
+                </div>
+                <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="Close">
+                    <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#close" category="utility" size="small" name="close" />
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="slds-p-horizontal_large slds-p-bottom_medium">
+        <div class="slds-grid slds-wrap slds-border_bottom slds-p-top_medium slds-p-bottom_medium company_primary_info">
+            <div class="slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12">
+                <ui:outputText class="form-control slds-text-heading_large slds-p-top_xx-small logo" aura:id="accName" value="{!v.accountDetails.acc.Name}" />
+            </div>
+            <div class="slds-large-size_8-of-12 slds-medium-size_8-of-12 slds-size_12-of-12">
+                <div class="slds-grid slds-wrap main-headings">
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile slds-m-top_small___tablet">
+                        <div class="slds-text-title_caps slds-truncate">Commitment Amount</div>
+                        <ui:outputCurrency class="form-control slds-text-heading_medium medium-bold" aura:id="comAmount" value="{!v.accountDetails.commitmentAmount}" />
+                    </div>
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile slds-m-top_small___tablet">
+                        <div class="slds-text-title_caps slds-truncate">AUM</div>
+                        <ui:outputCurrency class="form-control slds-text-heading_medium medium-bold" aura:id="aum" value="{!v.accountDetails.aum}" />
+                    </div>
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile slds-m-top_small___tablet">
+                        <div class="slds-text-title_caps slds-truncate">Outstanding Opportunities</div>
+                        <ui:outputCurrency class="form-control slds-text-heading_medium medium-bold" aura:id="outstandingOppty" value="{!v.accountDetails.outstandingOppty}" />
+                    </div>
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile slds-m-top_small___tablet">
+                        <div class="slds-text-title_caps slds-truncate">Retention Risk</div>
+                        <ui:outputText class="form-control slds-text-heading_medium medium-bold" aura:id="retRisk" value="{!v.accountDetails.acc.Retention_Risk__c}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap slds-p-top_x-small user_primary_info">
+            <div class="slds-large-size_6-of-12 slds-medium_size_6-of-12 slds-size_12-of-12">
+                <ul class="user-info-list">
+                    <li>
+                        <span class="slds-icon_container slds-icon-utility-call">
+                            <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#call" category="utility" size="xx-small" name="call" />
+                        </span>
+                        <span class="user-info-detail slds-text-body_small"><ui:outputPhone value="{!v.accountDetails.acc.Phone}"/></span>
+                    </li>
+                    <li>
+                        <span class="slds-icon_container slds-icon-utility-location">
+                            <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#location" category="utility" size="xx-small" name="location" />
+                        </span>
+                        <span class="user-info-detail slds-text-body_small">
+                            <a href="{!v.accountDetails.acc.Website}" target="_new"><ui:outputText value="{!v.accountDetails.acc.Website}"/></a>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="slds-icon_container slds-icon-utility-checkin">
+                            <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#checkin" category="utility" size="xx-small" name="checkin" />
+                        </span>
+                        <span class="user-info-detail slds-text-body_small slds-text-color_default"><ui:outputText value="{!v.accountDetails.address}"/></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="slds-large-size_6-of-12 slds-medium_size_6-of-12 slds-size_12-of-12 slds-m-top_small___mobile slds-m-top_small___tablet">
+                <ul class="user-info-list right">
+                    <li>
+                        <span class="slds-text-body_small title">Customer Since: </span>
+                        <span class="slds-m-left_x-small value slds-text-color_default"><ui:outputDate value="{!v.accountDetails.acc.CreatedDate}" format="MM/dd/yyyy"/></span>
+                    </li>
+                    <li>
+                        <span class="slds-text-body_small title">Industry: </span>
+                        <span class="slds-m-left_x-small value slds-text-color_default"><ui:outputText value="{!v.accountDetails.acc.Industry}"/></span>
+                    </li>
+                    <li>
+                        <span class="slds-text-body_small title">Region: </span>
+                        <span class="slds-m-left_x-small value slds-text-color_default"><ui:outputText value="{!v.accountDetails.acc.Region__c}"/></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="slds-grid slds-wrap slds-m-top_x-large company_growth_info">
+            <div class="slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12 slds-m-left_small___mobile">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_12-of-12">
+                        <div class="slds-text-title_caps">Parent Company</div>
+                        <div class="slds-text-heading_medium medium-bold"><ui:outputText value="{!v.accountDetails.acc.Parent.Name}"/></div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-large-size_8-of-12 slds-medium-size_8-of-12 slds-size_12-of-12">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile">
+                        <div class="slds-text-title_caps slds-truncate">Annual Revenue</div>
+                        <ui:outputCurrency class="form-control slds-text-heading_medium medium-bold" aura:id="annualRevenue" value="{!v.accountDetails.annualRevenue}"/>
+                    </div>
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile">
+                        <div class="slds-text-title_caps slds-truncate">Company Growth Indicator</div>
+                        <div class="slds-text-heading_medium medium-bold">
+                            <span class="slds-icon_container slds-icon-utility-arrowup growth-indicator up">
+                                <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#arrowup" category="utility" size="xx-small" name="arrowup" />
+                            </span>
+                            <span>12.2%</span>
+                        </div>
+                    </div>
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile slds-m-top_small___tablet">
+                        <div class="slds-text-title_caps slds-truncate">Account Growth Indicator</div>
+                        <div class="slds-text-heading_medium medium-bold">
+                            <span class="slds-icon_container slds-icon-utility-arrowup growth-indicator down">
+                                <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#arrowdown" category="utility" size="xx-small" name="arrowdown" />
+                            </span>
+                            <span>15.1%</span>
+                        </div>
+                    </div>
+                    <div class="slds-large-size_3-of-12 slds-medium-size_6-of-12 slds-size_6-of-12 slds-p-horizontal_small slds-m-top_small___mobile slds-m-top_small___tablet">
+                        <div class="slds-text-title_caps slds-truncate">ROEC</div>
+                        <div class="slds-text-heading_medium medium-bold">{!v.accountDetails.roec}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

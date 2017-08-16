@@ -1,0 +1,101 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="cases" type="Case[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-m-top_large">
+        <div class="slds-box content-card slds-p-around_small card-3 animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">Cases</h3>
+                    </div>
+                    <div class="slds-float_right card-action-container modal_opener" data-modal=".modal-cases">
+                        <span class="slds-icon_container slds-icon-utility-add card-action-icon" onclick="{!c.createRecord}">
+                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                        svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#add" 
+                                        category="utility" size="x-small" name="add" />
+                            
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <div class="opportunities-card_container">
+                    <div class="opportunities-card_inner-container">
+                        <aura:iteration items="{!v.cases}" var="case">
+                            <div class="slds-grid slds-wrap slds-p-bottom_small slds-border_bottom">
+                                <div class="slds-size_12-of-12 slds-m-top_small">
+                                    <c:svgIcons class="slds-icon slds-icon_x-small" 
+                                        svgPath="/resource/UI_Assets/assets/icons/standard-sprite/svg/symbols.svg#case" 
+                                        category="standard" size="x-small" name="case" />
+                                    
+                                    <a href="{! '#/sObject/' + case.Id + '/view'}" class="slds-m-left_x-small">{!case.Subject}</a>
+                                </div>
+                                
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Case Number</div>
+                                    <div>{!case.CaseNumber}</div>
+                                </div>
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Priority</div>
+                                    <div>{!case.Priority}</div>
+                                </div>
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Status</div>
+                                    <div>{!case.Status}</div>
+                                </div>
+                                <div class="slds-size_6-of-12 slds-m-top_small">
+                                    <div class="slds-text-title">Type</div>
+                                    <div>{!case.Type}</div>
+                                </div>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </div>
+                
+                
+                <div class="slds-card slds-card--narrow slds-hide">
+                    <div class="slds-card__header slds-grid"></div>
+                    <div class="slds-card__body">
+                        <div class="slds-card__body--inner">
+                            <aura:iteration items="{!v.cases}" var="case">
+                            <div class="slds-tile">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-size--12-of-12">
+                                        <h3 class="slds-truncate" title="{!case.CaseNumber}">
+                                            <a href="{! '#/sObject/' + case.Id + '/view'}">{!case.CaseNumber}</a>
+                                        </h3>
+                                        <div class="slds-tile__detail slds-text-body--small">
+                                            <dl class="slds-dl--horizontal">
+                                                <dt class="slds-dl--horizontal__label">
+                                                    <span class="slds-truncate">Subject:</span>
+                                                </dt>
+                                                <dd class="slds-dl--horizontal__detail slds-tile__meta">
+                                                    {!case.Subject}
+                                                </dd>
+                                                <dt class="slds-dl--horizontal__label slds-m-top_small___mobile">
+                                                    <span class="slds-truncate">Priority:</span>
+                                                </dt>
+                                                <dd class="slds-dl--horizontal__detail slds-tile__meta">
+                                                    <span class="slds-truncate">{!case.Priority}</span>
+                                                </dd>
+                                                <dt class="slds-dl--horizontal__label slds-m-top_small___mobile">
+                                                    <span class="slds-truncate">Status:</span>
+                                                </dt>
+                                                <dd class="slds-dl--horizontal__detail slds-tile__meta">
+                                                    <span class="slds-truncate">{!case.Status}</span>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </aura:iteration>
+                        </div>
+                    </div>
+                    <div class="slds-card__footer"><a href="javascript:void(0);"><span class="slds-assistive-text">entity type</span></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

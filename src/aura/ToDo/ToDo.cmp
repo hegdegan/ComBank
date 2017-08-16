@@ -1,0 +1,44 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="tasks" type="Task[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="slds-large-size_12-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-right_large___tablet slds-p-top_large___tablet slds-p-top_large___desktop slds-p-top_large___mobile">
+        <div class="slds-box content-card slds-p-around_small card-3 animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">To Do's</h3>
+                    </div>
+                    <div class="slds-float_right card-action-container">
+                        <span class="slds-icon_container slds-icon-utility-add card-action-icon" onclick="{!c.createRecord}">
+                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                        svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#add" 
+                                        category="utility" size="x-small" name="add" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <aura:iteration items="{!v.tasks}" var="task">
+                    <div class="slds-grid slds-wrap slds-m-top_small">
+                        <div class="slds-size_1-of-12">
+                            <span class="slds-icon_container slds-icon_container--circle">
+                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon--small" 
+                                            svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#task" 
+                                            category="utility" size="small" name="task" />
+                            </span>
+                        </div>
+                        <div class="slds-size_11-of-12 slds-p-left_small">
+                            <div class="slds-text-title_caps slds-m-top_xx-small slds-truncate">
+                                <a href="{! '#/sObject/' + task.Id + '/view'}">
+                                    {!task.Subject}
+                                </a>
+                            </div>
+                            <div><ui:outputDate value="{!task.ActivityDate}" format="MM/dd/YYYY"/></div>
+                        </div>
+                    </div>
+                </aura:iteration>
+            </div>
+        </div>
+    </div>
+</aura:component>

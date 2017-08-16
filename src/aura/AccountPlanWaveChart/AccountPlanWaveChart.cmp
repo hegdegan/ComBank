@@ -1,0 +1,18 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <aura:attribute name="recordId" type="Id"/>
+    <div class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_12-of-12 slds-p-top_large card-3 animated fadeIn">
+        <div class="slds-box content-card slds-p-around_small animated fadeIn extra-height">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">Chart</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-border_right">
+                <wave:waveDashboard dashboardId="0FK630000004CmjGAE" showTitle="false" height="287" filter="{'datasets':{'Customer_Service_Rating':[{'fields':['Plan_Name__c'], 'filter':{'operator': 'matches', 'values':['Opportunity Plan - J.M. Soft']}}]}}" />
+            </div>
+        </div>
+    </div>
+    <ltng:require scripts="{!$Resource.UI_Assets + '/assets/js/jquery-1.12.0.min.js'}" afterScriptsLoaded="{!c.myAction}"/>
+</aura:component>

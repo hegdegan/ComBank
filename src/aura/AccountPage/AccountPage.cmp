@@ -1,0 +1,66 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="profileName" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<html class="no-js" lang="" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <title></title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+            
+            <ltng:require styles="/resource/UI_Assets/assets/styles/salesforce-lightning-design-system.min.css" />
+            <ltng:require styles="/resource/UI_Assets/assets/styles/animate.css" />
+            <ltng:require styles="/resource/UI_Assets/assets/styles/main_styles.css?nocache=06152017_236" />
+        </head>
+
+        <body>
+            <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        	<![endif]-->
+            
+            <div class="slds-scope slds preload">
+                <c:AccountPageHeader recordId="{!v.recordId}"/>
+                <div class="main-container">
+                    <div class="slds-container_fluid slds-container_center">
+                        <div class="slds-grid slds-wrap content-card-main card-main animated fadeIn">
+                            <div class="slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12">
+                                <!-- Portfolio Graph Component Goes Here -->
+                               <!-- <img src="/resource/UI_Assets/assets/images/screen_1.png" />-->
+                                <c:AccountDashboard recordId="{!v.recordId}"/>
+                            </div>
+                            <div class="slds-large-size_8-of-12 slds-medium-size_8-of-12 slds-size_12-of-12">
+                                <c:PortfolioTabs recordId="{!v.recordId}"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-m-top_large">
+                            <div class="slds-large-size_8-of-12 slds-medium-size_12-of-12 slds-size_12-of-12 slds-p-right_large___desktop">
+                                <div class="slds-grid slds-wrap">
+                                    <c:Opportunities recordId="{!v.recordId}"/>
+                                    <c:AccountPlan recordId="{!v.recordId}"/>
+                                    <c:RecentActivities recordId="{!v.recordId}"/>
+                                    <!--<c:Chatter recordId="{!v.recordId}"/>-->
+                                    <aura:if isTrue="{!v.profileName == 'Custom : Account Service'}">
+                                        <c:Checklist recordId="{!v.recordId}"/>
+                                        <aura:set attribute="else">
+                                            <c:Cases recordId="{!v.recordId}"/>
+                                        </aura:set>
+                                    </aura:if> 
+                                </div>
+                            </div>
+                            <div class="slds-large-size_4-of-12 slds-medium-size_12-of-12 slds-size_12-of-12 slds-m-top_large___mobile slds-m-top_large___tablet">
+								<div class="slds-grid slds-wrap">
+                                    <c:Contacts recordId="{!v.recordId}"/>
+                                    <c:UpcomingMeetings recordId="{!v.recordId}"/>
+                                    <c:ToDo recordId="{!v.recordId}"/>
+                                    <c:GoogleBot recordId="{!v.recordId}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <ltng:require scripts="{!join(',', $Resource.UI_Assets + '/assets/js/jquery-1.12.0.min.js', $Resource.UI_Assets + '/assets/js/app_main.js?nocache=06152017_236')}" afterScriptsLoaded="{!c.myAction}"/>
+        </body>
+    </html>
+    
+</aura:component>

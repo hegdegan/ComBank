@@ -1,0 +1,101 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="meetings" type="Event[]"/>
+    <aura:attribute name="meetingSubject" type="String"/>
+    <aura:attribute name="meetingId" type="String"/>
+    <aura:attribute name="callNote" type="Call_Notes__c"
+                    default="{ 'sobjectType': 'Call_Notes__c',
+                             'Comments__c': '',
+                             'Action_Items__c': ''
+                             }"/>
+    <aura:registerEvent name="refreshCallNotes" type="c:refreshCallNotes"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="slds-large-size_12-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-m-top_large___desktop slds-p-top_large___mobile">
+        <div class="slds-box content-card slds-p-around_small card-2 animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">Upcoming Meetings</h3>
+                    </div>
+                    <div class="slds-float_right card-action-container">
+                        <span class="slds-icon_container slds-icon-utility-add card-action-icon" onclick="{!c.createRecord}">
+                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                        svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#add" 
+                                        category="utility" size="x-small" name="add" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <aura:iteration items="{!v.meetings}" var="meeting">
+                    <div class="slds-grid slds-wrap slds-m-top_small">
+                        <div class="slds-size_1-of-12">
+                            <span class="slds-icon_container slds-icon_container--circle">
+                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon--small" 
+                                            svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#people" 
+                                            category="utility" size="small" name="people" />
+                            </span>
+                        </div>
+                        <div class="slds-size_11-of-12 slds-p-left_small">
+                            <div class="slds-clearfix upcoming-meetings_container">
+                                <div class="slds-float_left">	
+                                    <div class="slds-text-title_caps slds-m-top_xx-small slds-truncate">
+                                        <a href="{! '#/sObject/' + meeting.Id + '/view'}">
+                                            {!meeting.Subject}
+                                        </a>
+                                    </div>
+                                    <div><ui:outputDateTime value="{!meeting.StartDateTime}" format="MM/dd/YYYY hh:mm a"/></div>
+                                </div>
+                                <div class="slds-float_right slds-text-align_right">
+                                	<button class="slds-button slds-button--neutral" onclick="{!c.showModal}" value="{!meeting.Subject}" id="{!meeting.Id}">Call Note</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:iteration>
+            </div>
+        </div>
+    </div>
+    
+    <div aria-hidden="false" id="newAccountSectionId" role="dialog" class="slds-modal slds-modal--large slds-fade-in-open" style="display:none;">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 id="modal-heading" class="slds-text-heading--medium">{!v.meetingSubject}</h2>
+                <button class="slds-button slds-button--icon-inverse slds-modal__close" data-aljs-dismiss="modal">
+                    <c:svgIcons class="slds-button__icon slds-button__icon--large" 
+                                svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#close" 
+                                category="utility" size="x-small" name="add" />
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+                <div class="slds-grid slds-wrap">
+                    
+                    <div class="slds-size--12-of-12">
+                        <div class="slds-form-element slds-p-horizontal--x-small">
+                            <label class="slds-form-element__label" for="acc-comm-ip">Meeting Summary</label>
+                            <div class="slds-form-element__control">
+                                <ui:inputTextArea value="{!v.callNote.Comments__c}" class="slds-input"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size--12-of-12">
+                        <div class="slds-form-element slds-p-horizontal--x-small">
+                            <label class="slds-form-element__label" for="acc-actit-ip">Action Items</label>
+                            <div class="slds-form-element__control">
+                                <ui:inputTextArea value="{!v.callNote.Action_Items__c}" class="slds-input"/></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="slds-modal__footer">
+                <button class="slds-button slds-button--neutral" onclick="{!c.showModalBox}" >Cancel</button>
+<button class="slds-button slds-button--neutral slds-button--brand" onclick="{!c.saveCallNote}">Save</button>
+
+            </div>
+            
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop--open" id="backGroundSectionId" style="display:none;"></div>
+</aura:component>

@@ -1,0 +1,70 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="opportunities" type="Opportunity[]"/>
+    <aura:attribute name="profileName" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="sendOpportunityId" type="c:SendOpportunityId"/>
+    <aura:handler event="c:RefreshComponents" action="{!c.doInit}"/>
+    <div class="slds-size_12-of-12">
+        <div class="slds-box content-card slds-p-around_small card-1 animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">Opportunities</h3>
+                    </div>
+                    <div class="slds-float_right card-action-container">
+                        <span class="slds-icon_container slds-icon-utility-add card-action-icon">
+                            <c:svgIcons svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#add" category="utility" size="x-small" name="add" />
+                        </span>
+                        <span class="slds-text-title_caps slds-m-left_xx-small modal_opener" data-modal=".modal-opportunity" onclick="{!c.createRecord}">New Opportunity</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Opportunity Name</th>
+                            <th scope="col">Overall Age</th>
+                            <th scope="col">Sales Stage</th>
+                            <th scope="col">Asset Value</th>
+                            <th scope="col">Contract End Date</th>
+                            <aura:if isTrue="{!v.profileName == 'Custom : Account Service'}">
+                                <th scope="col">Action</th>
+                                <aura:set attribute="else">
+                                    <th scope="col" style="display:none">Action</th>
+                                </aura:set>
+                            </aura:if> 
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.opportunities}" var="opp">
+                            <tr>
+                                <th data-label="Opportunity Name" scope="row">
+                                    <a href="{! '#/sObject/' + opp.Id + '/view'}">{!opp.Name}</a>
+                                </th>
+                                <td data-label="Overall Age">
+                                    <aura:renderIf isTrue="{!and(opp.StageName != 'Closed Won', opp.StageName != 'Closed Lost')}">
+                                        {!opp.Overall_Age__c} days
+                                        <aura:set attribute="else">
+                                            
+                                        </aura:set>
+                                    </aura:renderIf> </td>
+                                <td data-label="Sales Stage">{!opp.StageName}</td>
+                                <td data-label="Asset Value"><ui:outputCurrency value="{!opp.Amount__c}" format="$#,###"/></td>
+                                <td data-label="Contract End Date"><ui:outputDate value="{!opp.End_date__c}" format="MM/dd/YYYY"/></td>
+                            <aura:if isTrue="{!v.profileName == 'Custom : Account Service'}">
+                                <td scope="col"><a href="" onclick="{!c.showChecklist}" value="{!opp.Id}">Complete Checklist</a></td>
+                                <aura:set attribute="else">
+                                    <td scope="col" style="display:none">Action</td>
+                                </aura:set>
+                            </aura:if>    
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</aura:component>

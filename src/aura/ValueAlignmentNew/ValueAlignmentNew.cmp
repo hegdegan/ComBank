@@ -1,0 +1,53 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="valueAlignment" type="Value_Alignment__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-top_large___mobile card-2 animated fadeIn">
+        <div class="slds-box content-card slds-p-around_small animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">Value Alignment</h3>
+                    </div>
+                    <div class="slds-float_right card-action-container">
+                        <span class="slds-icon_container slds-icon-utility-add card-action-icon" onclick="{!c.addValue}">
+                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                        svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#add" category="utility" size="x-small" name="add" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Paremeter</th>
+                            <th scope="col">Competitor</th>
+                            <th scope="col">Treasury</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Structure</th>
+                            <th scope="col">Corp Fin / M&amp;A</th>
+                            <th scope="col">Global Markets FX / IRD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.valueAlignment}" var="valueAlignment">
+                        <tr>
+                            <!--<th data-label="Value Alignment Name" scope="row">
+                                    <a href="{! '#/sObject/' + valueAlignment.Id + '/view'}">{!valueAlignment.Name}</a>
+                                </th>-->
+                            <th data-label="Paremeter" scope="row">{!valueAlignment.Name}</th>
+                            <td data-label="Competitor"><ui:outputCheckBox value="{!valueAlignment.Competitor__c}"/></td>
+                            <td data-label="Treasury">{!valueAlignment.Treasury__c}</td>
+                            <td data-label="Price">{!valueAlignment.Price__c}</td>
+                            <td data-label="Structure">{!valueAlignment.Structure__c}</td>
+                            <td data-label="Corp Fin / M&amp;A">{!valueAlignment.Corp_Finance_M_A__c}</td>
+                            <td data-label="Global Markets FX / IRD">{!valueAlignment.Global_Markets_FX_IRD__c}</td>
+                        </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</aura:component>

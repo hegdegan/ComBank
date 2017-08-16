@@ -1,0 +1,137 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="rpList" type="AccountController.RecommendedPlans[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="accPlan" type="Account_Plan__c"
+                    default="{ 'sobjectType': 'Account_Plan__c',
+                             'Results_What_we_know__c': '',
+                             'Results_What_we_Need_to_Know__c': '',
+                             'Obstacles_What_We_Know__c': '',
+                             'Obstacles_What_we_Need_to_Know__c': '',
+                             'Execution_What_we_Know__c': '',
+                             'Execution_What_we_Need_to_Know__c': ''
+                             }"/>
+    <aura:handler event="c:SaveAccountPlanEvent" action="{!c.saveAccPlan}"/>
+    <div class="slds-grid slds-wrap content-card-main card-main animated fadeIn card-1">
+        <div class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_12-of-12 slds-p-horizontal_small">
+            <div class="main-content-tabs">
+                <div class="slds-tabs_default">
+                    <ul class="slds-tabs_default__nav" role="tablist">
+                        <li class="slds-tabs_default__item slds-truncate slds-is-active" role="presentation">
+                            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-desired-results"
+                               id="tab-default-1__item">Desired Results</a>
+                        </li>
+                        <li class="slds-tabs_default__item slds-truncate" role="presentation">
+                            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-obstacles"
+                               id="tab-default-2__item">Obstacles</a>
+                        </li>
+                        <li class="slds-tabs_default__item slds-truncate" role="presentation">
+                            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-action-required"
+                               id="tab-default-3__item">Action Required</a>
+                        </li>
+                        <li class="slds-tabs_default__item slds-truncate" role="presentation">
+                            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-recommendations"
+                               id="tab-default-3__item">Product Recommendations</a>
+                        </li>
+                    </ul>
+                    <div id="tab-desired-results" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-show animated fadeIn"
+                         role="tabpanel" aria-labelledby="tab-default-1__item">
+                        <div class="slds-grid slds-wrap slds-p-top_small">
+                            <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-horizontal_small">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">What we know?</label>
+                                    <div class="slds-form-element__control">
+                                        <textarea class="slds-textarea ckeditor" id="dr_whatweknow"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-horizontal_small">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">What we need to know?</label>
+                                    <div class="slds-form-element__control">
+                                        <textarea class="slds-textarea ckeditor" id="dr_needtoknow"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-obstacles" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-hide animated fadeIn"
+                         role="tabpanel" aria-labelledby="tab-default-2__item">
+                        <div class="slds-grid slds-wrap slds-p-top_small">
+                            <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-horizontal_small">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">What we know?</label>
+                                    <div class="slds-form-element__control">
+                                        <textarea class="slds-textarea ckeditor" id="o_whatweknow"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-horizontal_small">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">What we need to know?</label>
+                                    <div class="slds-form-element__control">
+                                        <textarea class="slds-textarea ckeditor" id="o_needtoknow"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-action-required" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-hide animated fadeIn"
+                         role="tabpanel" aria-labelledby="tab-default-3__item">
+                        <div class="slds-grid slds-wrap slds-p-top_small">
+                            <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-horizontal_small">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">What we know?</label>
+                                    <div class="slds-form-element__control">
+                                        <textarea class="slds-textarea ckeditor" id="ar_whatweknow"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-horizontal_small">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">What we need to know?</label>
+                                    <div class="slds-form-element__control">
+                                        <textarea class="slds-textarea ckeditor" id="ar_needtoknow"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-recommendations" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-hide animated fadeIn"
+                         role="tabpanel" aria-labelledby="tab-default-3__item">
+                        <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Rationale</th>
+                                    <th scope="col">Discussed with Client?</th>
+                                    <th scope="col">Opportunity Exists</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.rpList}" var="rp">
+                                    <tr>
+                                        <th data-label="Name" scope="row">{!rp.planName}</th>
+                                        <td data-label="Rationale">{!rp.matchPercentage}% based on the existing product : <i>{!rp.sourcePlanName}</i></td>
+                                        <td data-label="Discussed with Client?">
+                                            <label class="slds-checkbox">
+                                                <ui:inputCheckBox value="{!rp.discussedWithClient}" aura:id="discussed" class="slds-checkbox" click="{!c.getInput}"/>
+                                                <span class="slds-checkbox_faux"></span>
+                                            </label>
+                                        </td>
+                                        <td data-label="Opportunity Exists?">
+                                            <label class="slds-checkbox">
+                                                <ui:inputCheckBox value="{!rp.opportunityExits }" aura:id="oppExists" class="slds-checkbox" click="{!c.getInput}" />
+                                                <span class="slds-checkbox_faux"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
+</aura:component>

@@ -1,0 +1,92 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="oppty" type="Opportunity" default="{ 'sobjectType': 'Opportunity',
+                                                             'Insurance_Certificate__c': '',
+                                                             'Property_Reports__c': '',
+                                                             'Tax_Assessment__c': '',
+                                                             'Capital_Allocation_and_Approvals__c': '',
+                                                             'Business_Tax_Returns__c': ''
+                                                             }"/>
+    <aura:handler event="c:SendOpportunityId" action="{!c.getOpportunityId}"/>
+    <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-m-top_large">
+        <div class="slds-box content-card slds-p-around_small card-3 animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">Checklist</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <div class="slds-p-right--small">
+                    <div class="acc-block--content checklist-block slds-p-around--small">
+                        <div class="slds-grid slds-m-around--small">
+                            <div class="slds-col--padded slds-large-size--1-of-2">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckBox value="{!v.oppty.Insurance_Certificate__c }" aura:id="insCert" class="slds-checkbox" click="{!c.updateOppty}" />
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-form-element__label">Insurance Certificate</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="slds-col--padded slds-large-size--1-of-2">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckBox value="{!v.oppty.Property_Reports__c }" aura:id="insCert" class="slds-checkbox" click="{!c.updateOppty}" />
+                                            <span class="slds-checkbox--faux"></span>
+                                            <span class="slds-form-element__label">Property Reports</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="slds-col--padded slds-large-size--1-of-2">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckBox value="{!v.oppty.Tax_Assessment__c }" aura:id="insCert" class="slds-checkbox" click="{!c.updateOppty}" />
+                                            <span class="slds-checkbox--faux"></span>
+                                            <span class="slds-form-element__label">Tax Assessment</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-m-around--small">
+                            <div class="slds-col--padded slds-large-size--1-of-2">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckBox value="{!v.oppty.Capital_Allocation_and_Approvals__c }" aura:id="insCert" class="slds-checkbox" click="{!c.updateOppty}" />
+                                            <span class="slds-checkbox--faux"></span>
+                                            <span class="slds-form-element__label">Capital Allocation and Approvals</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="slds-col--padded slds-large-size--1-of-2">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckBox value="{!v.oppty.Business_Tax_Returns__c }" aura:id="insCert" class="slds-checkbox" click="{!c.updateOppty}" />
+                                            <span class="slds-checkbox--faux"></span>
+                                            <span class="slds-form-element__label">Business Tax Returns</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

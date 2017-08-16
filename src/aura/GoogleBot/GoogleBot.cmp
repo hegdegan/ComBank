@@ -1,0 +1,59 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id"/>
+    <html class="no-js" lang="" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <title></title>
+            <ltng:require styles="/resource/UI_Assets/assets/styles/salesforce-lightning-design-system.min.css" />
+            <ltng:require styles="/resource/UI_Assets/assets/styles/animate.css" />
+            <ltng:require styles="/resource/UI_Assets/assets/styles/main_styles.css" />
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <ltng:require scripts="{!join(',', $Resource.voice + '/voice/responsivevoice.js', $Resource.voice + '/voice/jquery.min.js')}" afterScriptsLoaded="{!c.myAction}"/>
+            <!--<ltng:require scripts="/resource/assets/assets/scripts/jquery.min.js" afterScriptsLoaded="{!c.myAction}" />
+            <ltng:require scripts="/resource/voice/voice/responsivevoice.js" afterScriptsLoaded="{!c.myAction}"/>-->
+        </head>
+        <body>
+            <div class="slds-is-fixed chat-bot-container minimize-it slds-form">
+                <div class="chat-bot-topbar slds-is-relative">
+                    <div class="slds-clearfix">
+                        <div class="smart_bot chat_type_handle slds-float--left selected slds-p-horizontal--medium" style="width:45%">
+                            <span class="slds-icon_container slds-icon-utility-add card-action-icon">
+                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                            svgPath="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#chat" category="utility" size="x-small" name="add" />
+                            </span>
+                            <span class="chat-type-title">Smart Bot</span>
+                        </div>
+                        <div class="sfdc_chat chat_type_handle slds-float--left slds-p-horizontal--medium" style="width:45%">
+                            <span class="slds-icon_container slds-icon-utility-add card-action-icon">
+                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                            svgPath="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#chat" category="utility" size="x-small" name="add" />
+                            </span>
+                            <span class="chat-type-title">Lightning Bot</span>
+                        </div>
+                    </div>
+                    <div class="slds-is-absolute chat-minimize">
+                        <span class="slds-icon_container slds-icon-utility-add card-action-icon">
+                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                        svgPath="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#dash" category="utility" size="x-small" name="add" />
+                        </span>
+                    </div>
+                </div>
+                <div class="chat_panel chat-bot-conversation-panel slds-p-around--small" id="response"></div>
+                <div class="chat_panel chat-bot-conversation-panel-sfdc slds-p-around--small slds-hide">
+                    <!--<div id="lightningBot"/>-->
+                    <c:Bot recordId="{!v.recordId}"/>
+                </div>
+                <div class="chat-bot-messaging-panel slds-p-horizontal--small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+                            <span class="slds-is-absolute slds-icon_container slds-icon-utility-add card-action-icon chat-bot--speak-icon" id="rec" onclick="return false;">
+                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                            svgPath="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#unmuted" category="utility" size="x-small" name="add" />
+                            </span>
+                            <input id="input" placeholder="Ask Bot.." class="slds-input" type="text" aria-autocomplete="list" role="combobox" aria-expanded="true" aria-activedescendant="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+</aura:component>

@@ -1,0 +1,216 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="loans" type="Obligation__c"/>
+    <aura:attribute name="deposits" type="Obligation__c"/>
+    <aura:attribute name="derivatives" type="Obligation__c"/>
+    <aura:attribute name="fx" type="Obligation__c"/>
+    <aura:attribute name="cards" type="Obligation__c"/>
+    <aura:attribute name="userRole" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="main-content-tabs" style="display:none">
+        <div class="slds-tabs_default">
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <aura:if isTrue="{!v.userRole != 'Deposit'}">
+                    <li class="slds-tabs_default__item slds-is-active" role="presentation">
+                        <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-loans"
+                           id="tab-default-1__item">Loans</a>
+                    </li>
+                </aura:if> 
+                <aura:if isTrue="{!v.userRole != 'Loan'}">
+                    <li class="slds-tabs_default__item" role="presentation">
+                        <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-deposits"
+                           id="tab-default-2__item">Deposits</a>
+                    </li>
+                </aura:if>
+                <aura:if isTrue="{!and(v.userRole != 'Deposit', v.userRole != 'Loan')}">
+                    <li class="slds-tabs_default__item" role="presentation">
+                        <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-derivatives"
+                           id="tab-default-3__item">Derivatives</a>
+                    </li>
+                </aura:if>
+                <li class="slds-tabs_default__item" role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-fx"
+                       id="tab-default-3__item">FX</a>
+                </li>
+                <li class="slds-tabs_default__item" role="presentation">
+                    <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-cards"
+                       id="tab-default-3__item">Cards</a>
+                </li>
+            </ul>
+            <div id="tab-loans" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-show animated fadeIn"
+                 role="tabpanel" aria-labelledby="tab-default-1__item">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Product</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Fee</th>
+                            <th scope="col" data-label="Availability">Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.loans}" var="loans">
+                            <tr>
+                                <th data-label="Product" scope="row">{!loans.Product_Name__c}</th>
+                                <td data-label="Value">
+                                    <ui:outputCurrency value="{!loans.Loan_Balance__c}" format="$#,###"/>
+                                </td>
+                                <td data-label="Fee">
+                                    <ui:outputCurrency value="{!loans.Loan_Fee__c}" format="$#,###"/>
+                                </td>
+                                <td data-label="Availability">
+                                    <aura:renderIf isTrue="{!loans.Loan_Availbility__c == TRUE}">
+                                        <span class="slds-icon_container slds-icon-utility-approval">
+                                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#approval" category="utility" size="x-small" name="approval" />
+                                        </span>
+                                        <aura:set attribute="else">
+                                            <span class="slds-icon_container slds-icon-utility-close">
+                                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#close" category="utility" size="x-small" name="close" />
+                                            </span>
+                                            
+                                        </aura:set>
+                                    </aura:renderIf> 
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tab-deposits" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-hide animated fadeIn"
+                 role="tabpanel" aria-labelledby="tab-default-2__item">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Deposit Type</th>
+                            <th scope="col">Interest Rate</th>
+                            <th scope="col">Current Balance</th>
+                            <th scope="col">Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.deposits}" var="deposits">
+                            <tr>
+                                <th data-label="Deposit Type" scope="row">{!deposits.Product_Name__c}</th>
+                                <td data-label="Interest Rate"><ui:outputNumber value="{!deposits.Interest_Rate__c}"/>%</td>
+                                <td data-label="Current Balance"><ui:outputCurrency value="{!deposits.Current_Balance__c}" format="$#,###"/></td>
+                                <td data-label="Duration"><ui:outputNumber value="{!deposits.Duration__c}"/> days</td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tab-derivatives" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-hide animated fadeIn"
+                 role="tabpanel" aria-labelledby="tab-default-3__item">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Obligation ID</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Fee</th>
+                            <th scope="col">Product Type</th>
+                            <th scope="col" data-label="Availability">Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.derivatives}" var="derivatives">
+                            <tr>
+                                <th data-label="Obligation ID" scope="row">{!derivatives.Obligation_ID__c}</th>
+                                <td data-label="Balance"><ui:outputCurrency value="{!derivatives.Derivative_Balance__c}" format="$#,###"/></td>
+                                <td data-label="Fee"><ui:outputCurrency value="{!derivatives.Derivative_Fee__c}" format="$#,###"/></td>
+                                <td data-label="Product Type">{!derivatives.Product_Type__c}</td>
+                                <td data-label="Availability">
+                                    <aura:renderIf isTrue="{!derivatives.Availability__c == TRUE}">
+                                        <span class="slds-icon_container slds-icon-utility-approval">
+                                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#approval" category="utility" size="x-small" name="approval" />
+                                        </span>
+                                        <aura:set attribute="else">
+                                            <span class="slds-icon_container slds-icon-utility-close">
+                                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#close" category="utility" size="x-small" name="close" />
+                                            </span>
+                                            
+                                        </aura:set>
+                                    </aura:renderIf> 
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tab-fx" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-hide animated fadeIn"
+                 role="tabpanel" aria-labelledby="tab-default-3__item">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Obligation ID</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Fee</th>
+                            <th scope="col" data-label="Availability">Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.fx}" var="fx">
+                            <tr>
+                                <th data-label="Obligation ID" scope="row">{!fx.Obligation_ID__c}</th>
+                                <td data-label="Balance"><ui:outputCurrency value="{!fx.FX_Balance__c}" format="$#,###"/></td>
+                                <td data-label="Fee"><ui:outputCurrency value="{!fx.FX_Fee__c}" format="$#,###"/></td>
+                                <td data-label="Availability">
+                                    <aura:renderIf isTrue="{!fx.Availability__c == TRUE}">
+                                        <span class="slds-icon_container slds-icon-utility-approval">
+                                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#approval" category="utility" size="x-small" name="approval" />
+                                        </span>
+                                        <aura:set attribute="else">
+                                            <span class="slds-icon_container slds-icon-utility-close">
+                                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#close" category="utility" size="x-small" name="close" />
+                                            </span>
+                                            
+                                        </aura:set>
+                                    </aura:renderIf> 
+                                </td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tab-cards" class="slds-scrollable slds-tabs_default__content slds-p-left_small___mobile slds-p-right_small___mobile slds-hide animated fadeIn"
+                 role="tabpanel" aria-labelledby="tab-default-3__item">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Obligation ID</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Credit Limit</th>
+                            <th scope="col">Product Type</th>
+                            <th scope="col" data-label="Availability">Availability</th>
+                            <th scope="col">Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!cards}" var="cards">
+                            <tr>
+                                <th data-label="Obligation ID" scope="row">{!cards.Obligation_ID__c}</th>
+                                <td data-label="Balance"><ui:outputCurrency value="{!fx.Card_Balance__c}" format="$#,###"/></td>
+                                <td data-label="Credit Limit"><ui:outputCurrency value="{!fx.Credit_Limit__c}" format="$#,###"/></td>
+                                <td data-label="Product Type">{!cards.Product_Type__c}</td>
+                                <td data-label="Availability">
+                                    <aura:renderIf isTrue="{!cards.Availability__c == TRUE}">
+                                        <span class="slds-icon_container slds-icon-utility-approval">
+                                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#approval" category="utility" size="x-small" name="approval" />
+                                        </span>
+                                        <aura:set attribute="else">
+                                            <span class="slds-icon_container slds-icon-utility-close">
+                                                <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" svgPath="/resource/UI_Assets/assets/icons/action-sprite/svg/symbols.svg#close" category="utility" size="x-small" name="close" />
+                                            </span>
+                                            
+                                        </aura:set>
+                                    </aura:renderIf> 
+                                </td>
+                                <td data-label="Due Date"><ui:outputDate value="{!cards.Card_Due_Date__c}" format="MM/dd/YYYY"/></td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <ltng:require scripts="{!join(',', $Resource.UI_Assets + '/assets/js/jquery-1.12.0.min.js', $Resource.UI_Assets + '/assets/js/app_main.js?nocache=05062017_727')}" afterScriptsLoaded="{!c.myAction}"/>
+</aura:component>

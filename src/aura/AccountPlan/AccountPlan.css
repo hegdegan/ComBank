@@ -1,0 +1,13 @@
+.THIS .call-note-items {
+    background:#F3F6F9;
+    padding: 8px 12px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    margin-top:6px;
+}
+
+.THIS .call-note-content{
+    color:#54698d;
+}
+
+.THIS .account-team_img{position:relative;top:3px;}

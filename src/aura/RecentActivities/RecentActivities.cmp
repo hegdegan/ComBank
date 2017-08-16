@@ -1,0 +1,27 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="recentActivities" type="AccountController.RecentActivity[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-m-top_large slds-p-right_large___desktop slds-p-right_large___tablet">
+        <div class="slds-box content-card slds-p-around_small card-3 animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <h3 class="slds-text-heading_small">Recent Activities</h3>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <aura:iteration items="{!v.recentActivities}" var="ra">
+                <div class="slds-grid slds-wrap slds-m-top_small">
+                    <div class="slds-size_1-of-12">
+                        <span class="slds-icon_container slds-icon_container--circle recent-activities-icon">
+                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon--medium" svgPath="/resource/UI_Assets/assets/icons/standard-sprite/svg/symbols.svg#recent" category="utility" size="medium" name="recent" />
+                        </span>
+                    </div>
+                    <div class="slds-size_11-of-12 slds-p-left_small">
+                        <div class="slds-text-title_caps slds-m-top_xx-small slds-truncate">{!ra.activityName}</div>
+                        <div><ui:outputDate value="{!ra.createdTime}" format="MM/dd/YYYY"/></div>
+                    </div>
+                </div>
+                </aura:iteration>
+            </div>
+        </div>
+    </div>
+</aura:component>

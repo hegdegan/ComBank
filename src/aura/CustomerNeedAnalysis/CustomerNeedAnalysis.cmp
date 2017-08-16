@@ -1,0 +1,48 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="needAnalysis" type="Customer_Need_Analysis__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:RefreshNeedAnalysis" action="{!c.handleRefreshNeedAnalysis}"/>
+    <div class="slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12 slds-p-right_large___desktop slds-p-right_large___tablet card-2 animated fadeIn">
+        <div class="slds-box content-card slds-p-around_small animated fadeIn">
+            <div class="slds-border_bottom slds-p-bottom_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_left">
+                        <h3 class="slds-text-heading_small">Customer Need Analysis</h3>
+                    </div>
+                    <!--<div class="slds-float_right card-action-container">
+                        <span class="slds-icon_container slds-icon-utility-add card-action-icon" onclick="{!c.addAnalysis}">
+                            <c:svgIcons class="slds-icon slds-icon-text-default slds-icon_x-small" 
+                                        svgPath="/resource/UI_Assets/assets/icons/utility-sprite/svg/symbols.svg#add" category="utility" size="x-small" name="add" />
+                        </span>
+                    </div>-->
+                </div>
+            </div>
+            <div class="slds-scrollable card-scrollable-area">
+                <table class="slds-table slds-table_bordered slds-max-medium-table--stacked">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">Product</th>
+                            <th scope="col">Service Provider</th>
+                            <th scope="col">Opportunity Value</th>
+                            <th scope="col">Opportunity Created?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.needAnalysis}" var="needAnalysis">
+                        <tr>
+                            <!--<th data-label="Opportunity Name" scope="row">
+                                    <a href="{! '#/sObject/' + needAnalysis.Id + '/view'}">{!needAnalysis.Name}</a>
+                                </th>-->
+                            <th data-label="Product" scope="row">{!needAnalysis.Name}</th>
+                            <td data-label="Service Provider">{!needAnalysis.Service_Provider__c}</td>
+                            <td data-label="Opportunity Value"><ui:outputCurrency value="{!needAnalysis.Actual_Revenue__c}" format="$#,###"/></td>
+                        <td data-label="Opportunity Created?"><ui:outputCheckBox value="{!needAnalysis.Opportunity_Created__c}"/></td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>	
+</aura:component>
