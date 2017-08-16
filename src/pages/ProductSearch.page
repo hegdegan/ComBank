@@ -1,0 +1,181 @@
+<apex:page standardController="Opportunity" extensions="ProductSearchController" sidebar="false" title="Product Selection for: {!opportunity.Name}" standardStylesheets="false">     
+    
+    <!--Selected Product section Start-->  
+    <script>
+    function onEnter(e){
+        if(e.keyCode == 13){
+            searchProduct();
+            return false;
+        }
+    }
+    function openProduct(id){
+        var url = "/"+id;
+        window.open(url, "_blank");
+    }
+    </script>
+    <apex:form id="form">
+        <!--Lightning Design-->
+        <apex:outputPanel id="LightningView" rendered="true">
+            <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <head>               
+                    <apex:slds />
+                    <style>
+                        html,
+                        body {height: 100%;width: 100%;overflow: auto;}
+                        input[type="text"], textarea, select {-webkit-appearance: none;}
+                        .MFS .slds-form-element.slds-is-required .slds-input, 
+                        .MFS .slds-form-element.slds-is-required .slds-select{border-left:3px solid #c00;}
+                        .MFS .slds-form-element.slds-is-required .slds-dirty-input{border:1px solid #c00;}
+                        
+                        .MFS .slds-form-element.slds-is-required .slds-form-element__label abbr{display:none;color: #c00;margin-left: 5px;font-style: italic;}
+                        .slds-loader--container .slds-backdrop{background:#FFF;opacity:0.6;}.slds-form-element.slds-is-required .slds-input, 
+                        .MFS .slds-form-element.slds-is-required .slds-select{border-left:3px solid #c00;}
+                        .MFS .slds-form-element.slds-is-required .slds-dirty-input{border:1px solid #c00;}
+                        
+                        .MFS .slds-form-element.slds-is-required .slds-form-element__label abbr{display:none;color: #c00;margin-left: 5px;font-style: italic;}
+                        .slds-loader--container .slds-backdrop{background:#FFF;opacity:0.6;}
+                    </style>
+                </head>
+                <body>            
+                    <div class="slds-scope">
+                        <div>
+                            <apex:outputLink value="/006/o">Opportunity</apex:outputLink>&nbsp;&#62;&nbsp;<apex:outputLink value="/{!Opportunity.Id}">{!Opportunity.Name}</apex:outputLink>
+                            <div class="slds-page-header" role="banner">
+                                <div class="slds-media slds-media--center">
+                                    <div class="slds-media__figure">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-standard-case">
+                                            <use xlink:href="{!URLFOR($Resource.assets, '/assets/icons/standard-sprite/svg/symbols.svg#product')}"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <p class="slds-page-header__title slds-align-middle">
+                                            Add {!$ObjectType.Product2.LabelPlural} - {!Opportunity.Name}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-panel slds-grid slds-grid--vertical" style="margin:10px !important;">
+                                <div class="slds-form--stacked slds-grow slds-scrollable--y">
+                                    <div class="slds-has-divider--bottom" style="padding-top: 10px !important;">
+                                        <div class="slds-card">
+                                            
+                                            <div class="slds-card__body slds-text-align--center">
+                                                <table class="slds-table slds-max-medium-table--stacked slds-m-top--medium">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="30%">
+                                                                <div class="slds-form-element">
+                                                                    <label class="slds-form-element__label" for="text-input-01">Product Name</label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!searchName}" styleClass="slds-input"/>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td width="30%">
+                                                                <div class="slds-form-element">
+                                                                    <label class="slds-form-element__label" for="select-01">Product Type</label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <div class="slds-select_container">
+                                                                            <apex:actionRegion >  
+                                                                                <apex:selectList value="{!searchType}" size="1" id="styleP" styleClass="slds-select">
+                                                                                    <apex:actionSupport event="onchange" action="{!searchProduct}" reRender="searchResults">                                         
+                                                                                    </apex:actionSupport>
+                                                                                    <apex:selectOptions value="{!ProductTypeOptions}"/>
+                                                                                </apex:selectList>
+                                                                            </apex:actionRegion>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td width="30%">
+                                                                <div class="slds-form-element">
+                                                                    <label class="slds-form-element__label" for="text-input-01">Product Code</label>
+                                                                    <div class="slds-form-element__control">
+                                                                        <apex:inputText value="{!searchCode}"  styleClass="slds-input"/>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 
+                                                                <apex:commandButton value="Search" action="{!searchProduct}" reRender="searchResults" styleClass="slds-button slds-button--neutral"/></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <apex:outputPanel id="searchResults" layout="block">
+                                                <table class="slds-table slds-table--bordered slds-max-medium-table--stacked">
+                                                    <thead>
+                                                        <tr>        
+                                                            <th class="slds-text-heading--label" scope="col">Product Name</th>
+                                                            <th class="slds-text-heading--label" scope="col">Product Type</th>
+                                                            <th class="slds-text-heading--label" scope="col">Product Code</th>
+                                                            <th class="slds-text-heading--label" scope="col">Product Description</th>
+                                                            <th class="slds-text-heading--label" scope="col">Product Family</th>
+                                                            <th class="slds-text-heading--label" scope="col">Action</th>
+                                                            
+                                                        </tr>
+                                                    </thead> 
+                                                    <tbody>
+                                                        <apex:repeat value="{!wraplist}" var="a">
+                                                            <tr>
+                                                                <td data-label="">
+                                                                    <div>
+                                                                        <apex:outputLink value="/{!a.prg.Product2.Id}" onclick="openProduct('{!a.prg.Product2.Id}'); return false;">
+                                                                            <apex:outputText value="{!a.prg.Name}" styleClass="slds-output"/>
+                                                                        </apex:outputLink>
+                                                                        
+                                                                    </div>
+                                                                </td>
+                                                                <td data-label="">
+                                                                    <div>
+                                                                        <apex:outputField value="{!a.prg.Type__c}" styleClass="slds-output"/>                                    
+                                                                    </div>
+                                                                </td>
+                                                                <td data-label="">
+                                                                    <div>
+                                                                        <apex:outputField value="{!a.prg.ProductCode}" styleClass="slds-output"/>                                    
+                                                                    </div>
+                                                                </td>
+                                                                <td data-label="">
+                                                                    <div>
+                                                                        <apex:outputField value="{!a.prg.Product2.Description}" styleClass="slds-output"/>                                    
+                                                                    </div>
+                                                                </td>
+                                                                <td data-label="">
+                                                                    <div>
+                                                                        <apex:outputField value="{!a.prg.Product2.Family}" styleClass="slds-output"/>                                    
+                                                                    </div>
+                                                                </td>
+                                                                <td data-label="Action">
+                                                                    <div>
+                                                                        <apex:outputLink onclick="addToLineItem('{!(a.prg.Name)}'); return false;"> Add </apex:outputLink>  
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                        
+                                                    </tbody>
+                                                </table> 
+                                            </apex:outputPanel>
+                                            <apex:actionFunction name="addToLineItem" action="{!addToLineItem}" rerender="selectedSLDS, searchResults">
+                                                <apex:param name="toSelect" value="" assignTo="{!toSelect}"/>
+                                            </apex:actionFunction>
+                                        </div><!-- End Card -->
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script src="/resource/assets/assets/js/jquery-1.11.3.min.js">
+                        </script>
+                    </div>
+                </body>
+            </html>
+        </apex:outputPanel>
+    </apex:form>  
+</apex:page>

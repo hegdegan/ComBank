@@ -1,0 +1,64 @@
+<apex:page >
+
+<apex:stylesheet value="{!URLFOR($Resource.assets,'assets/styles/salesforce-lightning-design-system.min.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.assets,'assets/styles/font-awesome.min.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.custom,'custom/css/styles.css')}"/>
+
+<style>
+.analyticsEmbeddedReportChart .outerbound {
+    border: 0;
+}
+</style>
+
+<apex:includeLightning />
+<div style="clear:both;">
+    <div class="slds-wrap slds-grid">
+        <div class="sls-size--4-of-12">
+            <div class="site-bg-white slds-p-right--small">
+                <analytics:reportChart reportId="00O63000000P54v" size="tiny" showRefreshButton="false"></analytics:reportChart>
+            </div>
+        </div>
+        <div class="sls-size--4-of-12 slds-p-right--small">        
+            <div class="site-bg-white">
+                <analytics:reportChart reportId="00O63000000P5FA" size="tiny" showRefreshButton="false"></analytics:reportChart>
+            </div>
+        </div>
+        <div class="sls-size--4-of-12 slds-p-right--small">
+            <div class="site-bg-white">
+                <analytics:reportChart reportId="00O63000000P5BN" size="tiny" showRefreshButton="false"></analytics:reportChart>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--div style="clear:both;">
+    <div style="float:left;margin-right:20px;">
+        <apex:enhancedList customizable="false" type="Account" height="200"/>
+    </div>
+    <div style="float:left;margin-right:20px;">
+        <apex:enhancedList customizable="false" type="Opportunity" height="200"/>
+    </div>
+    <div style="float:left;">
+        <apex:enhancedList customizable="false" type="Contact" height="200"/>
+    </div>
+</div-->
+<br/>
+<!--apex:includeScript value="/lightning/lightning.out.js" /-->
+
+    
+    
+    <div id="accounts"></div>
+    <!--<script>
+        $Lightning.use("c:Acc", function() {
+            $Lightning.createComponent(
+                "c:AccountListView",
+                {},
+                "accounts",
+                function(cmp) {
+                    console.log("Component created!");
+                    console.log(cmp);
+                });
+            });
+    </script>-->
+
+</apex:page>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddProduct</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EditAllProduct</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>AvailableQuantity</fullName>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>EndDate</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>ListPrice</fullName>
+    </fields>
+    <fields>
+        <fullName>OrderId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OriginalOrderItemId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Product2Id</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProductCode</fullName>
+    </fields>
+    <fields>
+        <fullName>Quantity</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>SBQQ__BillingFrequency__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Defines the billing frequency.</description>
+        <externalId>false</externalId>
+        <globalPicklist>SBQQ__BillingFrequency</globalPicklist>
+        <inlineHelpText>Defines the billing frequency.</inlineHelpText>
+        <label>Billing Frequency</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__DefaultSubscriptionTerm__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Term length of the subscription, which only applies if the product is a subscription. It is copied from the Subscription Term of the related product when the line item is first generated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Term length of the subscription, which only applies if the product is a subscription. It is copied from the Subscription Term of the related product when the line item is first generated.</inlineHelpText>
+        <label>Default Subscription Term</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SBQQ__DiscountSchedule__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Discount schedule applied to this order product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Discount schedule applied to this order product.</inlineHelpText>
+        <label>Discount Schedule</label>
+        <referenceTo>SBQQ__DiscountSchedule__c</referenceTo>
+        <relationshipLabel>Order Products</relationshipLabel>
+        <relationshipName>OrderProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__PriceDimension__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>References the price dimension applied to this order product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>References the price dimension applied to this order product.</inlineHelpText>
+        <label>Price Dimension</label>
+        <referenceTo>SBQQ__Dimension__c</referenceTo>
+        <relationshipLabel>Order Products</relationshipLabel>
+        <relationshipName>OrderProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__QuoteLine__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>The quote line where this order product is created from.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The quote line where this order product is created from.</inlineHelpText>
+        <label>Quote Line</label>
+        <referenceTo>SBQQ__QuoteLine__c</referenceTo>
+        <relationshipLabel>Order Products</relationshipLabel>
+        <relationshipName>OrderProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__RequiredBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Required By</label>
+        <referenceTo>OrderItem</referenceTo>
+        <relationshipLabel>Order Products</relationshipLabel>
+        <relationshipName>Components</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__SegmentIndex__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For multi-segmented products, Index representing this order product&apos;s position in the segment table.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For multi-segmented products, Index representing this order product&apos;s position in the segment table.</inlineHelpText>
+        <label>Segment Index</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SBQQ__SubscriptionPricing__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Determines how the subscription on this line item is priced. Blank value means this line contains product that&apos;s not a subscription.</description>
+        <externalId>false</externalId>
+        <globalPicklist>SBQQ__SubscriptionPricing</globalPicklist>
+        <inlineHelpText>Indicates how the subscription price is calculated. If this is blank, the line items is not a subscription product.</inlineHelpText>
+        <label>Subscription Pricing</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__SubscriptionTerm__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Subscription Term</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SBQQ__TermDiscountSchedule__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Term Discount Schedule applied to this order product.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Term Discount Schedule applied to this order product.</inlineHelpText>
+        <label>Term Discount Schedule</label>
+        <referenceTo>SBQQ__DiscountSchedule__c</referenceTo>
+        <relationshipLabel>Order Products (Term Discount Schedule)</relationshipLabel>
+        <relationshipName>TermedOrderProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__UnproratedNetPrice__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The full-term Net Price.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The full term net price for individual line.</inlineHelpText>
+        <label>Unprorated Net Price</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SBQQ__UpgradedSubscription__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>Subscription being upgraded by this quote line.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Subscription being upgraded by this quote line. When the quote is contracted this subscription will have its Terminated Date field populated.</inlineHelpText>
+        <label>Upgraded Subscription</label>
+        <referenceTo>SBQQ__Subscription__c</referenceTo>
+        <relationshipLabel>Order Products</relationshipLabel>
+        <relationshipName>OrderProducts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ServiceDate</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
+        <fullName>TotalPrice</fullName>
+    </fields>
+    <fields>
+        <fullName>UnitPrice</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+</CustomObject>

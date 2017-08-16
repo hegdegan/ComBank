@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Deposit</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Deposits</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Name --></label>
+        <name>Account_Name__c</name>
+        <relationshipLabel><!-- Deposits --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Current Balance --></label>
+        <name>Current_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit Type --></label>
+        <name>Deposit_Type__c</name>
+        <picklistValues>
+            <masterLabel>Basic Checking</masterLabel>
+            <translation><!-- Basic Checking --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Certificate of Deposit</masterLabel>
+            <translation><!-- Certificate of Deposit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interest-bearing Checking</masterLabel>
+            <translation><!-- Interest-bearing Checking --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Money Market Deposit</masterLabel>
+            <translation><!-- Money Market Deposit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Savings</masterLabel>
+            <translation><!-- Savings --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Duration --></label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Rate --></label>
+        <name>Interest_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Name --></label>
+        <name>Product_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revenue --></label>
+        <name>Revenue__c</name>
+    </fields>
+    <fields>
+        <label><!-- 12 month Balance --></label>
+        <name>X12_month_Balance__c</name>
+    </fields>
+    <layouts>
+        <layout>Deposit Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

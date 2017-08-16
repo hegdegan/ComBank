@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Account Plan</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Account Plans</value>
+    </caseValues>
+    <fields>
+        <label><!-- Client Desired Results --></label>
+        <name>Account_Objective_Client_Desired_Results__c</name>
+    </fields>
+    <fields>
+        <label><!-- Our Impact --></label>
+        <name>Account_Objective_Our_Impact__c</name>
+    </fields>
+    <fields>
+        <help><!-- Account Plan --></help>
+        <label><!-- Company Name --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Account Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- All-In Drawn Spread (LIBOR Spread + Facility Fee) --></help>
+        <label><!-- All-In Drawn Spread (LIBOR Spread + Faci --></label>
+        <name>All_In_Drawn_Spread_LIBOR_Spread_Faci__c</name>
+    </fields>
+    <fields>
+        <help><!-- Annual Revenue --></help>
+        <label><!-- Annual Revenue --></label>
+        <name>Annual_Revenue__c</name>
+    </fields>
+    <fields>
+        <help><!-- Average Outstanding --></help>
+        <label><!-- Average Outstanding --></label>
+        <name>Average_Outstanding__c</name>
+    </fields>
+    <fields>
+        <help><!-- Commitment Amount --></help>
+        <label><!-- Commitment Amount --></label>
+        <name>Commitment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Since --></label>
+        <name>Customer_Since__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discussed with client --></label>
+        <name>Discussed_with_client__c</name>
+    </fields>
+    <fields>
+        <label><!-- What we Know --></label>
+        <name>Execution_What_we_Know__c</name>
+    </fields>
+    <fields>
+        <label><!-- What We Need to Know --></label>
+        <name>Execution_What_we_Need_to_Know__c</name>
+    </fields>
+    <fields>
+        <label><!-- What We Know --></label>
+        <name>Obstacles_What_We_Know__c</name>
+    </fields>
+    <fields>
+        <label><!-- What We Need to Know --></label>
+        <name>Obstacles_What_we_Need_to_Know__c</name>
+    </fields>
+    <fields>
+        <label><!-- What we Know --></label>
+        <name>Opty_What_we_Know__c</name>
+    </fields>
+    <fields>
+        <label><!-- What We Need to Know --></label>
+        <name>Opty_What_we_Need_to_Know__c</name>
+    </fields>
+    <fields>
+        <label><!-- PD --></label>
+        <name>PD__c</name>
+    </fields>
+    <fields>
+        <help><!-- ROEC (Return on Economic Capital) --></help>
+        <label><!-- ROEC (Return on Economic Capital) --></label>
+        <name>ROEC_Return_on_Economic_Capital__c</name>
+    </fields>
+    <fields>
+        <help><!-- RORC (Return on Regulatory Capital) --></help>
+        <label><!-- RORC (Return on Regulatory Capital) --></label>
+        <name>RORC_Return_on_Regulatory_Capital__c</name>
+    </fields>
+    <fields>
+        <help><!-- What we Need to Know(Results) --></help>
+        <label><!-- What We Need to Know --></label>
+        <name>Results_What_we_Need_to_Know__c</name>
+    </fields>
+    <fields>
+        <help><!-- What we know (Results) --></help>
+        <label><!-- What We know --></label>
+        <name>Results_What_we_know__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Archived</masterLabel>
+            <translation><!-- Archived --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- What are the key points the value alignment tells us? --></help>
+        <label><!-- Key Points --></label>
+        <name>What_are_the_key_points_the_value_alignm__c</name>
+    </fields>
+    <layouts>
+        <layout>Account Plan Layout</layout>
+        <sections>
+            <label><!-- Account Objective --></label>
+            <section>Account Objective</section>
+        </sections>
+        <sections>
+            <label><!-- Actions Required for Execution --></label>
+            <section>Actions Required for Execution</section>
+        </sections>
+        <sections>
+            <label><!-- Company/Relationship Overview --></label>
+            <section>Company/Relationship Overview</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Desired Results --></label>
+            <section>Desired Results</section>
+        </sections>
+        <sections>
+            <label><!-- Obstacles --></label>
+            <section>Obstacles</section>
+        </sections>
+        <sections>
+            <label><!-- What are the key points the value alignment tells us? --></label>
+            <section>What are the key points the value alignment tells us?</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+    <webLinks>
+        <label><!-- Create_Opportunity --></label>
+        <name>Create_Opportunity</name>
+    </webLinks>
+</CustomObjectTranslation>

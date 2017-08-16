@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Role --></label>
+        <name>Role__c</name>
+        <picklistValues>
+            <masterLabel>Account Service Manager</masterLabel>
+            <translation><!-- Account Service Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product Manager - Commercial Lines/Rate Loans</masterLabel>
+            <translation><!-- Product Manager - Commercial Lines/Rate Loans --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product Manager - Commercial Term Loans</masterLabel>
+            <translation><!-- Product Manager - Commercial Term Loans --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product Manager - Money Market/Deposit</masterLabel>
+            <translation><!-- Product Manager - Money Market/Deposit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product Manager - Real Estate/Construction</masterLabel>
+            <translation><!-- Product Manager - Real Estate/Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Relationship Manager</masterLabel>
+            <translation><!-- Relationship Manager --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>[商品ルックアップ] ページのデフォルトのタブをカスタマイズします。</help>
+        <label><!-- Default Product Lookup Tab --></label>
+        <name>SBQQ__DefaultProductLookupTab__c</name>
+        <picklistValues>
+            <masterLabel>Guided Selling</masterLabel>
+            <translation>ガイド付き販売</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Search Filters</masterLabel>
+            <translation>検索条件</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>ユーザが見積ドキュメントの出力形式を変更できるようにする場合は、オンにします。</help>
+        <label><!-- Allow Output Format Change --></label>
+        <name>SBQQ__OutputFormatChangeAllowed__c</name>
+    </fields>
+    <fields>
+        <help>見積を追加するときに他の商品よりも前に Chatter でフォローした商品を表示する場合は、[フォロー済み] を選択します。</help>
+        <label><!-- Product Sort Preference --></label>
+        <name>SBQQ__ProductSortPreference__c</name>
+        <picklistValues>
+            <masterLabel>Followed</masterLabel>
+            <translation>フォロー済み</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>商品を見積に追加するたびに検索条件と結果をクリアする場合は、オンにします。オフにすると、前の選択内容が保持されます。</help>
+        <label><!-- Reset Product Lookup --></label>
+        <name>SBQQ__ResetProductLookup__c</name>
+    </fields>
+    <fields>
+        <label><!-- Theme --></label>
+        <name>SBQQ__Theme__c</name>
+    </fields>
+    <layouts>
+        <layout>User Profile Layout</layout>
+        <layoutType>UserAlt</layoutType>
+        <sections>
+            <label><!-- About --></label>
+            <section>About</section>
+        </sections>
+        <sections>
+            <label><!-- Background --></label>
+            <section>Background</section>
+        </sections>
+        <sections>
+            <label><!-- Contact --></label>
+            <section>Contact</section>
+        </sections>
+    </layouts>
+    <webLinks>
+        <label><!-- DocuSign_for_SteelBrick_CPQ_Setup --></label>
+        <name>SBQQDS__DocuSign_for_SteelBrick_CPQ_Setup</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Select_Theme --></label>
+        <name>SBQQ__Select_Theme</name>
+    </webLinks>
+</CustomObjectTranslation>

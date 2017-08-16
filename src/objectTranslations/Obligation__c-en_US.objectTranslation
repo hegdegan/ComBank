@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Obligation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Obligations</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Obligations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Availability --></label>
+        <name>Availability__c</name>
+    </fields>
+    <fields>
+        <label><!-- Balance --></label>
+        <name>Card_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Due Date --></label>
+        <name>Card_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Limit --></label>
+        <name>Credit_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Balance --></label>
+        <name>Derivative_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee --></label>
+        <name>Derivative_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Balance --></label>
+        <name>FX_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee --></label>
+        <name>FX_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Loan Availbility --></label>
+        <name>Loan_Availbility__c</name>
+    </fields>
+    <fields>
+        <label><!-- Balance --></label>
+        <name>Loan_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee --></label>
+        <name>Loan_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Maturity date --></label>
+        <name>Maturity_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Obligation ID --></label>
+        <name>Obligation_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Obligations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Origination Balance --></label>
+        <name>Origination_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Name --></label>
+        <name>Product_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Type --></label>
+        <name>Product_Type__c</name>
+        <picklistValues>
+            <masterLabel>Commercial Loan</masterLabel>
+            <translation><!-- Commercial Loan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Credit Card</masterLabel>
+            <translation><!-- Credit Card --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Derivative</masterLabel>
+            <translation><!-- Derivative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FX</masterLabel>
+            <translation><!-- FX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Letter of Credit</masterLabel>
+            <translation><!-- Letter of Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Term Loan</masterLabel>
+            <translation><!-- Term Loan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <layouts>
+        <layout>Cards</layout>
+        <sections>
+            <label><!-- Card Detail --></label>
+            <section>Card Detail</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Derivative</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Derivative Detail --></label>
+            <section>Derivative Detail</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FX</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- FX Detail --></label>
+            <section>FX Detail</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Loan</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Loan Detail --></label>
+            <section>Loan Detail</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Obligation Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Card --></label>
+        <name>Card</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Derivative --></label>
+        <name>Derivative</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FX --></label>
+        <name>FX</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Loan --></label>
+        <name>Loan</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

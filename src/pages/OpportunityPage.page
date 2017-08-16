@@ -1,0 +1,1351 @@
+<apex:page standardController="Opportunity" extensions="OpportunityController" tabStyle="Opportunity" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+            <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+            <title>{!Opportunity.Name}</title>
+            <apex:stylesheet value="{!URLFOR($Resource.assets,'assets/styles/salesforce-lightning-design-system.min.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.assets,'assets/styles/font-awesome.min.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.custom,'custom/css/styles.css')}"/>
+            <apex:includeScript value="/lightning/lightning.out.js" />
+            <script>
+            $Lightning.use("c:botApp", function() {
+                $Lightning.createComponent(
+                    "c:Bot",
+                    {},
+                    "lightningBot",
+                    function(cmp) {
+                        console.log("Component created!");
+                        console.log(cmp);
+                    });
+            });
+            </script>
+        </head>
+        
+        <body>
+            <style>
+                .checklist-block{
+                background:white;
+                }
+                .site-list--item{
+                width:42%;
+                }
+                .company-growth-indicator{position:relative;top:-3px;}
+                .company-growth-indicator.up svg{fill:#00a878;}
+                .company-growth-indicator.down svg{fill:#ff0000;}
+                .company-growth-indicator.dash svg{fill:yellow;}
+            </style>
+            <apex:form >
+                <div class="main-container slds-theme--shade">
+                    <div class="slds-grid slds-wrap slds-p-around--small">
+                        <div class="slds-size--12-of-12">
+                            <div class="mlb-block site-bg-white slds-p-around--small slds-m-bottom--small">
+                                <div class="mlb-header  slds-m-bottom--x-small">
+                                    <h2>{!Opportunity.Name}</h2>
+                                    <div class="mlb-header--contact slds-m-left--large">
+                                        <span class="mlb-contact--phone">
+                                            <i class="fa fa-phone" aria-hidden="true"></i> 
+                                        </span>
+                                        <span class="mlb-contact--address">
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i> <apex:outputText value="{!address}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="acc-block--content">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-size--4-of-12">
+                                            <div class="slds-p-right--large">
+                                                <table>
+                                                    <tr>
+                                                        <td>Region</td>
+                                                        <td>:</td>
+                                                        <td>{!Opportunity.account.Region__c}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Industry</td>
+                                                        <td>:</td>
+                                                        <td>{!Opportunity.account.Industry}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Customer Since</td>
+                                                        <td>:</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Parent Company</td>
+                                                        <td>:</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div> <!-- 1st of 3 columns-->
+                                        <div class="slds-size--4-of-12">
+                                            <div class="slds-p-horizontal--large">
+                                                <table>
+                                                    <tr>
+                                                        <td>Retention Risk</td>
+                                                        <td>:</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Commitment Amount</td>
+                                                        <td>:</td>
+                                                        <td><apex:outputText rendered="{!committmentAmount != null}" value="$"/><apex:outputText styleClass="mfs-bold" value="{0, number,###,###,###,###,###,###,##0}">
+                                                            <apex:param value="{!committmentAmount}"/></apex:outputText></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>AUM</td>
+                                                        <td>:</td>
+                                                        <td><apex:outputText rendered="{!averageOutStanding != null}" value="$"/><apex:outputText styleClass="mfs-bold" value="{0, number,###,###,###,###,###,###,##0}">
+                                                            <apex:param value="{!averageOutStanding}"/></apex:outputText></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Outstanding Opportunities</td>
+                                                        <td>:</td>
+                                                        <td><apex:outputText rendered="{!annualRevenue != null}" value="$"/><apex:outputText styleClass="mfs-bold" value="{0, number,###,###,###,###,###,###,##0}">
+                                                            <apex:param value="{!annualRevenue}"/></apex:outputText></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div> <!-- 1st of 3 columns-->
+                                        <div class="slds-size--4-of-12">
+                                            <div class="slds-p-left--large">
+                                                <table>
+                                                    <!-- <tr>
+<td>Risk Factor</td>
+<td>:</td>
+<td>{!account.risk_factor__c}</td>
+</tr> -->
+                                                    
+                                                    <!-- <tr>
+<td>All-in Drawn Speed</td>
+<td>:</td>
+<td>{!allInDrawnSpread}%</td>
+</tr> -->
+                                                    
+                                                    <!-- <tr>
+<td>RORC</td>
+<td>:</td>
+<td>{!rorc}%</td>
+</tr> -->
+                                                    
+                                                    <tr>
+                                                        <td>Annual Revenue</td>
+                                                        <td>:</td>
+                                                        <td> $<apex:outputText value="{0,number,###,###,##0}">
+                                                            <apex:param value="{!annualR}"/>
+                                                            </apex:outputText>M</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td>ROEC</td>
+                                                        <td>:</td>
+                                                        <td>{!roec}%</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td>Company Growth Indicator</td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <apex:outputPanel rendered="{!CompanyGrowthIndicator == 'High Growth'}" styleClass="slds-icon_container null slds-icon__svg--default company-growth-indicator up">
+                                                                <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#arrowup"></use>
+                                                                </svg>
+                                                            </apex:outputPanel>
+                                                            
+                                                            <apex:outputPanel rendered="{!CompanyGrowthIndicator == 'Medium Growth'}" styleClass="slds-icon_container null slds-icon__svg--default company-growth-indicator dash">
+                                                                <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#dash"></use>
+                                                                </svg>
+                                                            </apex:outputPanel>
+                                                            
+                                                            <apex:outputPanel rendered="{!CompanyGrowthIndicator == 'Low growth'}" styleClass="slds-icon_container null slds-icon__svg--default company-growth-indicator down ">
+                                                                <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                                                </svg>
+                                                            </apex:outputPanel>
+                                                            
+                                                            <!--{!CompanyGrowthIndicator}-->
+                                                            
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td>Account growth Indicator </td>
+                                                        <td>:</td>
+                                                        <td>
+                                                            <apex:outputPanel rendered="{!AccountgrowthIndicator == 'Fast'}" styleClass="slds-icon_container null slds-icon__svg--default company-growth-indicator up">
+                                                                <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#arrowup"></use>
+                                                                </svg>
+                                                            </apex:outputPanel>
+                                                            
+                                                            <apex:outputPanel rendered="{!AccountgrowthIndicator == 'Median'}" styleClass="slds-icon_container null slds-icon__svg--default company-growth-indicator dash">
+                                                                <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#dash"></use>
+                                                                </svg>
+                                                            </apex:outputPanel>
+                                                            
+                                                            <apex:outputPanel rendered="{!AccountgrowthIndicator == 'Slow'}" styleClass="slds-icon_container null slds-icon__svg--default company-growth-indicator down ">
+                                                                <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                                                </svg>
+                                                            </apex:outputPanel>
+                                                            <!--<td>{!AccountgrowthIndicator }</td> -->
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    
+                                                    
+                                                </table>
+                                            </div>
+                                        </div> <!-- 1st of 3 columns-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-size--8-of-12">
+                            <div class="slds-p-right--small">
+                                <div class="acc-block portfolios-block site-bg-white slds-m-bottom--small tabbed-block">
+                                    <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                        <h2>
+                                            <span class="slds-icon_container site-header--icon">
+                                                <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/standard-sprite/svg/symbols.svg#product')}"></use></svg>
+                                            </span>
+                                            Loan Details
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid_pull-padded" style="background-color:white !important">
+                                    <div class="slds-p-horizontal--medium slds-size--1-of-2 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Loan Number </label>
+                                            <div class="slds-form-element__control">
+                                                <apex:outputText value="{!Opportunity.Adi_Loan_number__c}" styleClass="slds-output"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-horizontal--medium slds-size--1-of-2 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Loan Purpose </label>
+                                            <div class="slds-form-element__control">
+                                                <apex:outputText value="{!Opportunity.Adi_Loan_purpose__c}" styleClass="slds-output"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-horizontal--medium slds-size--1-of-2 slds-medium-size--1-of-1 slds-large-size--1-of-2 ">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Loan Term</label>
+                                            <div class="slds-form-element__control">
+                                                <apex:outputText value="{!Opportunity.Adi_Loan_term__c}" styleClass="slds-output"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-horizontal--medium slds-size--1-of-2 slds-medium-size--1-of-1 slds-large-size--1-of-2 ">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Loan Status</label>
+                                            <div class="slds-form-element__control">
+                                                <apex:outputText value="{!Opportunity.Adi_Loan_status__c}" styleClass="slds-output"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-horizontal--medium slds-size--1-of-2 slds-medium-size--1-of-1 slds-large-size--1-of-2 ">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Loan Type</label>
+                                            <div class="slds-form-element__control">
+                                                <apex:outputText value="{!Opportunity.Adi_Loan_type__c}" styleClass="slds-output"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-size--4-of-12">
+                            <div>
+                                <div class="acc-block contacts-block site-bg-white slds-m-bottom--small">
+                                    <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                        <h2>
+                                            Contacts
+                                            <a href="#" class="header-action--button">
+                                                <span class="slds-icon_container slds-icon_container--circle site-border--one"  onclick="createNewContact();return false;">
+                                                    <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#add')}"></use>
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                        </h2>
+                                    </div>
+                                    
+                                    <div class="acc-block--content slds-p-around--small">
+                                        <div class="site-list site-table">
+                                            <!-- ReleationShip Manager ---->
+                                                <div class="site-list--item site-table--tr">
+                                                    <div class="site-table--td slds-p-horizontal--x-small meeting-list--date">
+                                                        <span class="slds-icon_container slds-icon_container--circle" style="background: #00a878;">
+                                                            <svg class="slds-icon slds-icon--small" aria-hidden="true" style="color: white;">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#add_contact')}"></use>
+                                                            </svg>
+                                                            <span class="slds-assistive-text">
+                                                                
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <div class="contact-item--name">
+                                                            Edward Turner
+                                                        </div>
+                                                        <div class="contact-item--title">
+                                                            Releationship Manager
+                                                        </div>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <div class="contact-item--phone">
+                                                            <apex:outputPanel layout="none" >
+                                                                <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#call')}"></use>
+                                                                </svg>
+                                                                (686) 767-7746
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <div class="contact-item--email">
+                                                            <apex:outputPanel layout="none" >
+                                                                <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#email')}"></use>
+                                                                </svg>
+                                                                Edwardtuner@BankUnited.com
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              <!-- End of Releation Manager --->
+                                              
+                                              <!-- Division Manager -->
+                                              
+                                                  <div class="site-list--item site-table--tr">
+                                                    <div class="site-table--td slds-p-horizontal--x-small meeting-list--date">
+                                                        <span class="slds-icon_container slds-icon_container--circle" style="background: #00a878;">
+                                                            <svg class="slds-icon slds-icon--small" aria-hidden="true" style="color: white;">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#add_contact')}"></use>
+                                                            </svg>
+                                                            <span class="slds-assistive-text">
+                                                                
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <div class="contact-item--name">
+                                                            Brian Clay
+                                                        </div>
+                                                        <div class="contact-item--title">
+                                                            Division Manager
+                                                        </div>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <div class="contact-item--phone">
+                                                            <apex:outputPanel layout="none" >
+                                                                <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#call')}"></use>
+                                                                </svg>
+                                                                (686) 767-8899
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <div class="contact-item--email">
+                                                            <apex:outputPanel layout="none" >
+                                                                <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#email')}"></use>
+                                                                </svg>
+                                                                Brianclay@BankUnited.com
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              
+                                              
+                                              <!-- end of Division Manager -->
+                                              
+                                              
+                                              <!-- Team Lead --->
+                                              
+                                                  <div class="site-list--item site-table--tr">
+                                                    <div class="site-table--td slds-p-horizontal--x-small meeting-list--date">
+                                                        <span class="slds-icon_container slds-icon_container--circle" style="background: #00a878;">
+                                                            <svg class="slds-icon slds-icon--small" aria-hidden="true" style="color: white;">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#add_contact')}"></use>
+                                                            </svg>
+                                                            <span class="slds-assistive-text">
+                                                                
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <div class="contact-item--name">
+                                                            Gregory Milford
+                                                        </div>
+                                                        <div class="contact-item--title">
+                                                            Team Leader
+                                                        </div>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <div class="contact-item--phone">
+                                                            <apex:outputPanel layout="none" >
+                                                                <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#call')}"></use>
+                                                                </svg>
+                                                                (686) 767-9966
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                        <div class="contact-item--email">
+                                                            <apex:outputPanel layout="none" >
+                                                                <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#email')}"></use>
+                                                                </svg>
+                                                               Gregorymilford@BankUnited.com
+                                                            </apex:outputPanel>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              
+                                              
+                                              <!-- End of Team Lead -->  
+                                               
+                                                
+                                                
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-size--8-of-12">
+                            <div class="slds-p-right--small">
+                                <div class="acc-block oppurtunities-block site-bg-white slds-m-bottom--small">
+                                    <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                        <h2>
+                                            <span class="slds-icon_container site-header--icon">
+                                                <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#new_opportunity')}"></use>
+                                                </svg>
+                                            </span>
+                                            Products
+                                            <apex:outputPanel rendered="{!IF($Profile.Name == 'Custom : Relationship Manager' || $Profile.Name == 'System Administrator', TRUE, FALSE)}">
+                                                <a href="#" class="header-action--button">
+                                                    <span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="newOpportunity();return false;">
+                                                        <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#add_relationship')}"></use></svg>
+                                                    </span>
+                                                </a>
+                                            </apex:outputPanel>
+                                        </h2>
+                                    </div>
+                                    <div class="acc-block--content slds-p-around--small">
+                                        <table class="slds-table slds-table--cell-buffer slds-table--bordered">
+                                            <thead class="slds-theme--shade">
+                                                <tr>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Product Name
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Product Type</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Product Description </div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Product Code </div>
+                                                    </th>
+                                                  <!--  <th scope="col">
+                                                        <div class="slds-truncate">Contract End Date</div>
+                                                    </th>
+                                                    <apex:outputPanel rendered="{!IF($Profile.Name == 'Custom : Account Service', TRUE, FALSE)}">
+                                                        <th scope="col">
+                                                            <div class="slds-truncate">Action</div>
+                                                        </th>
+                                                    </apex:outputPanel> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                        <!-- Sagar --->                    
+                          <apex:repeat value="{!opplineList}" var="oppor">
+                            <tr>
+                                <td scope="row">
+                                <div class="slds-truncate slds-float--left">
+                               <!-- <apex:outputLink value="{!opportunity.opp.Id}" onclick="openLightningURL('{!opportunity.opp.Id}'); return false;">{!opportunity.opp.Name}</apex:outputLink> -->
+                                 {!oppor.product2.name}
+                                
+                                </div>
+                                </td>
+                                
+                                
+                                <td>
+                                  <div class="slds-truncate">
+                                  {!oppor.product2.Type__c}
+                                </div>
+                                </td>
+                                
+                                <td>
+                                <div class="slds-truncate">
+                                   {!oppor.product2.Description}
+                                </div>
+                                </td>
+                                
+                                <td>
+                                <div class="slds-truncate">
+                                   {!oppor.product2.ProductCode}
+                                </div>
+                                </td>
+                                
+                              <!--  <td>
+                                <div class="slds-truncate">
+                                    {!oppor.Opportunity.Name}
+                                </div>
+                                </td> -->
+                           
+                            </tr>
+                            </apex:repeat>
+                           <!-- sagar -->                                                 
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-size--4-of-12">
+                            <div>
+                                <div class="acc-block meetings-block site-bg-white slds-m-bottom--small">
+                                    <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                        <h2>
+                                            Upcoming Meetings
+                                            <span class="slds-badge slds-m-left--small">{!listMeeting.size}</span>
+                                            <a href="#" class="header-action--button">
+                                                <span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="createMeeting();return false;">
+                                                    <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#add')}"></use>
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                        </h2>
+                                    </div>
+                                    <div class="acc-block--content slds-p-around--small">
+                                        <div class="site-list site-table">
+                                            <apex:variable var="meetingNum" value="{!1}"  />
+                                            <apex:repeat value="{!listMeeting}" var="meeting">
+                                                <div class="{!if(MOD(meetingNum ,2) == 0, 'site-list--item site-table--tr contact-list--item','site-list--item site-table--tr')}">
+                                                    <div class="site-table--td slds-p-horizontal--x-small meeting-list--date"> 
+                                                        <span class="slds-icon_container slds-icon_container--circle site-border--one">
+                                                            <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#event')}"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <apex:outputLink value="{!meeting.id}" onclick="openLightningURL('{!meeting.id}'); return false;">{!meeting.Subject}</apex:outputLink><br />
+                                                        <apex:outputField value="{!meeting.startDateTime}"/>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small meeting-list--cn">
+                                                        <button class="slds-button slds-button--neutral slds-not-selected acc-cn-btn" type="button"  data-aljs="modal" data-aljs-show="cn-modal" onclick="showCallNoteModal('{!meeting.Id}','{!meeting.subject}','{!meeting.startDateTime}');">Call Notes</button>
+                                                    </div>
+                                                </div>
+                                                <apex:variable var="meetingNum" value="{!meetingNum+1}"/>
+                                            </apex:repeat>
+                                            <!-- Row of Data-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-size--8-of-12">
+                            <div class="slds-p-right--small">
+                                <div class="acc-block account-block site-bg-white slds-m-bottom--small tabbed-block">
+                                    <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                        <h2>
+                                            <span class="slds-icon_container site-header--icon">
+                                                <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#goal')}"></use>
+                                                </svg>
+                                            </span>
+                                            Opportunity Team
+                                           <!-- <apex:outputPanel rendered="{!IF($Profile.Name == 'Custom : Relationship Manager' || $Profile.Name == 'System Administrator', TRUE, FALSE)}" layout="none">
+                                                <apex:outputPanel layout="none" rendered="{!accPlanId != null}">
+                                                    <a href="javascript:void(0)" class="header-action--button">
+                                                        <span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="openAccountPlan();">
+                                                            <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#edit')}"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel layout="none" rendered="{!accPlanId == null}">
+                                                    <a href="#" class="header-action--button">
+                                                        <span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="openAccountPlan();">
+                                                            <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#add')}"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>-->
+                                        </h2>
+                                    </div>
+                                    <div class="acc-block--content slds-p-around--small">
+                                        <div class="site-tab">
+                                            <div class="site-tab--header">
+                                                <!--h2 data-target="nba-block" class="slds-text-title--caps slds-p-around--x-small site-link--pointer">Next Best Analysis</h2-->
+                                                <h2 data-target="cn-block" class="slds-text-title--caps slds-p-around--x-small site-link--pointer">Call Notes</h2>
+                                                <h2 data-target="at-block" class="slds-text-title--caps slds-p-around--x-small site-link--pointer">Account Team</h2>
+                                            </div>
+                                            <div class="site-tab--content">
+                                                
+                                                <div data-blockID="cn-block" class="slds-hide slds-p-vertical--small">
+                                                    <apex:outputPanel id="callNotesList" layout="block">
+                                                        <apex:repeat value="{!listCallNotes}" var="note">
+                                                            <div class="cn-row">
+                                                                <div class="cn-time site-disp-iblock">
+                                                                    <div class="site-disp-iblock cn-date-icon"><svg aria-hidden="true" class="slds-icon slds-icon--small"><use xlink:href="/resource/1487151727000/assets/assets/icons/standard-sprite/svg/symbols.svg#event" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg></div>
+                                                                    <div class="site-disp-iblock cn-date-data"> 
+                                                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                                            <apex:param value="{!note.CreatedDate}" />
+                                                                        </apex:outputText>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cn-data site-disp-iblock">
+                                                                    <div class="cn-summ cn-summ--comp slds-theme--shade">
+                                                                        <h2>
+                                                                            <svg aria-hidden="true" class="slds-icon slds-icon--x-small slds-m-right--x-small"><use xlink:href="/resource/1487151727000/assets/assets/icons/utility-sprite/svg/symbols.svg#user_role" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg>
+                                                                            Meeting Summary
+                                                                        </h2>
+                                                                        <p>{!note.Comments__c}</p>
+                                                                    </div>
+                                                                    
+                                                                    <div class="cn-summ cn-summ--act slds-theme--shade">
+                                                                        <h2>
+                                                                            <svg aria-hidden="true" class="slds-icon slds-icon--x-small"><use xlink:href="/resource/1487151727000/assets/assets/icons/standard-sprite/svg/symbols.svg#work_order_item" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg>
+                                                                            Action Items
+                                                                        </h2>
+                                                                        <p>{!note.Action_Items__c}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </apex:repeat>  
+                                                    </apex:outputPanel>                                                  
+                                                </div>
+                                                <div data-blockID="at-block" class="slds-hide slds-p-vertical--small">
+                                                    <div class="at-data">
+                                                        <apex:repeat value="{!listAccountTeamMember}" var="accountMember">
+                                                            <div class="site-list--item site-list--row slds-size--1-of-3 slds-m-horizontal--small slds-m-bottom--small">
+                                                                <div class="site-list--cell">
+                                                                    <span>
+                                                                        <img class="" src="{!accountMember.User.SmallPhotoUrl}" style="color: white;border-radius: 50%;" width="50"/>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="site-list--cell">
+                                                                    <div class="contact-item--name">
+                                                                        {!accountMember.User.Name}
+                                                                    </div>
+                                                                    <div class="contact-item--title">
+                                                                        {!accountMember.TeamMemberRole}
+                                                                    </div>
+                                                                    
+                                                                    <div class="contact-item--email">
+                                                                        <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small"><use xlink:href="/resource/1487151727000/assets/assets/icons/utility-sprite/svg/symbols.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg>
+                                                                        {!accountMember.User.username}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </apex:repeat>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-size--4-of-12">
+                            <div>
+                                <div class="acc-block activities-block site-bg-white slds-m-bottom--small">
+                                    <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                        <h2>
+                                            
+                                            To Do's
+                                            <a class="header-action--button" href="#">
+                                                <span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="createTask(); return false;">
+                                                    <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small"><use xlink:href="/resource/1487158424000/assets/assets/icons/utility-sprite/svg/symbols.svg#add" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg>
+                                                </span>
+                                            </a>
+                                        </h2>
+                                    </div>
+                                    <div class="acc-block--content slds-p-around--small">
+                                        <div class="site-list site-table">
+                                            <apex:variable var="taskNum" value="{!1}"  />
+                                            <apex:repeat value="{!listTask}" var="task">
+                                                <div class="{!if(MOD(taskNum ,2) == 0, 'site-list--item site-table--tr contact-list--item','site-list--item site-table--tr')}">
+                                                    <div class="site-table--td slds-p-horizontal--x-small meeting-list--date">
+                                                        <span class="slds-icon_container slds-icon_container--circle site-border--one">
+                                                            <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#task')}"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <span><apex:outputLink value="{!task.Id}" onclick="openLightningURL('{!task.Id}'); return false;">{!task.Subject}</apex:outputLink></span><br/>
+                                                        <apex:outputfield value="{!task.ActivityDate}"/>
+                                                    </div>
+                                                </div>
+                                                <apex:variable var="taskNum" value="{!taskNum+1}"/>
+                                            </apex:repeat>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <apex:outputPanel rendered="{!IF($Profile.Name != 'Custom : Account Service', TRUE, FALSE)}" layout="none">
+                            <div class="slds-size--8-of-12">
+                                <div class="slds-p-right--small">
+                                    <div class="acc-block cases-block site-bg-white slds-m-bottom--small">
+                                        <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                            <h2>
+                                                <span class="slds-icon_container site-header--icon">
+                                                    <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/standard-sprite/svg/symbols.svg#case')}"></use>
+                                                    </svg>
+                                                </span>
+                                                Cases
+                                                <apex:outputPanel rendered="{!IF($Profile.Name == 'Custom : Relationship Manager' || $Profile.Name == 'System Administrator', TRUE, FALSE)}" layout="none">
+                                                    <a href="#" class="header-action--button">
+                                                        <span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="createCase(); return false;">
+                                                            <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#new_child_case')}"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </a>
+                                                </apex:outputPanel>
+                                            </h2>
+                                        </div>
+                                        <div class="acc-block--content slds-p-around--small">
+                                            <table class="slds-table slds-table--cell-buffer slds-table--bordered">
+                                                <thead class="slds-theme--shade">
+                                                    <tr>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate">Case Number</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate">Subject</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate">Priority</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate">Status</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <apex:repeat value="{!listCase}" var="case">
+                                                        <tr>
+                                                            <td scope="row">
+                                                                <div class="slds-truncate">
+                                                                    <apex:outputLink value="{!case.Id}" onclick="openLightningURL('{!case.Id}'); return false;">{!case.CaseNumber}</apex:outputLink>
+                                                                    <apex:outputPanel layout="none" rendered="{!case.priority == 'High'}">
+                                                                        <svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true" style="fill: #fb712d;"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#warning')}"></use></svg>
+                                                                    </apex:outputPanel>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{!case.Subject}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{!case.Priority}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{!case.Status}</div>
+                                                            </td>
+                                                        </tr>
+                                                    </apex:repeat>                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="block" id="checklistBlock" styleClass="slds-size--8-of-12" rendered="{!IF($Profile.Name == 'Custom : Account Service', TRUE, FALSE)}">
+                            <apex:outputPanel layout="none" rendered="{!showChecklist}">
+                                <div>
+                                    <div class="slds-p-right--small">
+                                        <div class="acc-block site-bg-white slds-m-bottom--small">
+                                            <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                                <h2>
+                                                    <span class="slds-icon_container site-header--icon">
+                                                        <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true">
+                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#check')}"></use>
+                                                        </svg>
+                                                    </span>
+                                                    CheckList
+                                                    <!--<a href="#" class="header-action--button">
+<span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="createCase(); return false;">
+<svg class="slds-icon slds-icon-text-default slds-icon--x-small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#new_child_case')}"></use>
+</svg>
+</span>
+</a> -->
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <div class="acc-block--content checklist-block slds-p-around--small">
+                                            <div class="slds-grid slds-m-around--small">
+                                                <div class="slds-col--padded slds-large-size--1-of-3">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <apex:inputField value="{!oppty.Insurance_Certificate__c}">
+                                                                    <apex:actionsupport event="onclick" action="{!updateOppty}" rerender="false"/>
+                                                                </apex:inputField>
+                                                                <span class="slds-checkbox--faux"></span>
+                                                                <span class="slds-form-element__label">Insurance Certificate</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="slds-col--padded slds-large-size--1-of-3">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <apex:inputField value="{!oppty.Property_Reports__c}">
+                                                                    <apex:actionsupport event="onclick" action="{!updateOppty}" rerender="false"/>
+                                                                </apex:inputField>
+                                                                <span class="slds-checkbox--faux"></span>
+                                                                <span class="slds-form-element__label">Property Reports</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="slds-col--padded slds-large-size--1-of-3">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <apex:inputField value="{!oppty.Tax_Assessment__c}">
+                                                                    <apex:actionsupport event="onclick" action="{!updateOppty}" rerender="false"/>
+                                                                </apex:inputField>
+                                                                <span class="slds-checkbox--faux"></span>
+                                                                <span class="slds-form-element__label">Tax Assessment</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="slds-grid slds-m-around--small">
+                                                <div class="slds-col--padded slds-large-size--1-of-3">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <apex:inputField value="{!oppty.Capital_Allocation_and_Approvals__c}">
+                                                                    <apex:actionsupport event="onclick" action="{!updateOppty}" rerender="false"/>
+                                                                </apex:inputField>
+                                                                <span class="slds-checkbox--faux"></span>
+                                                                <span class="slds-form-element__label">Capital Allocation and Approvals</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="slds-col--padded slds-large-size--1-of-3">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <apex:inputField value="{!oppty.Business_Tax_Returns__c}">
+                                                                    <apex:actionsupport event="onclick" action="{!updateOppty}" rerender="false"/>
+                                                                </apex:inputField>
+                                                                <span class="slds-checkbox--faux"></span>
+                                                                <span class="slds-form-element__label">Business Tax Returns</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="slds-col--padded slds-large-size--1-of-3">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                        <div class="slds-size--4-of-12">
+                            <div>
+                                <div class="acc-block activities-block site-bg-white slds-m-bottom--small">
+                                    <div class="acc-block--header slds-p-around--x-small slds-border--bottom">
+                                        <h2>
+                                            
+                                            Recent Activity
+                                            <!-- <a class="header-action--button" href="#">
+<span class="slds-icon_container slds-icon_container--circle site-border--one" onclick="createTask(); return false;">
+<svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small"><use xlink:href="/resource/1487158424000/assets/assets/icons/utility-sprite/svg/symbols.svg#add" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg>
+</span>
+</a> -->
+                                        </h2>
+                                    </div>
+                                    <div class="acc-block--content slds-p-around--small">
+                                        <div class="site-list site-table">
+                                            <apex:variable var="taskNum" value="{!1}"  />
+                                            <apex:repeat value="{!wrapperList}" var="act">
+                                                <div class="{!if(MOD(taskNum ,2) == 0, 'site-list--item site-table--tr contact-list--item','site-list--item site-table--tr')}">
+                                                    <div class="site-table--td slds-p-horizontal--x-small meeting-list--date">
+                                                        <span class="slds-icon_container slds-icon_container--circle site-border--one">
+                                                            <svg class="slds-icon slds-icon-text-default slds-icon--small" aria-hidden="true">
+                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/utility-sprite/svg/symbols.svg#success')}"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="site-table--td slds-p-horizontal--x-small">
+                                                        <span><apex:outputLink value="{!act.recordId}" onclick="openLightningURL('{!act.recordId}'); return false;">{!act.activityName }</apex:outputLink></span><br/>
+                                                        <apex:outputText value="{0, date, MMMM d',' yyyy hh:mm a}" >
+                                                            <apex:param value="{!act.createdTime}" /> 
+                                                        </apex:outputText>
+                                                    </div>
+                                                </div>
+                                                <apex:variable var="taskNum" value="{!taskNum+1}"/>
+                                            </apex:repeat>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <style>
+                        .chat-bot-container{border-radius:4px;box-shadow:0px 6px 6px 3px #c2cedb;bottom:0;right:2px;height:480px;width: 360px;overflow:hidden;background: #FFF;z-index: 9;}
+                        .chat-bot-container.minimize-it{height:40px;border:1px solid #A8b7c7;border-bottom:2px solid #1589EE;}
+                        .chat-bot-topbar{color:#FFF;height:40px;line-height:35px;background:#f7f9fb;border-bottom:2px solid #1589EE;}
+                        .chat-bot-topbar .selected{background:#1589EE;}
+                        .chat-bot-topbar .selected svg{fill:#FFF;position:relative;top:-2px;}
+                        
+                        .chat-bot-topbar .chat-type-title{color:#333;position:relative;top:3px;cursor:pointer;}
+                        .chat-bot-topbar .selected .chat-type-title{color:#FFF;}
+                        
+                        .chat-bot-conversation-panel-sfdc{height:auto;overflow:auto;}
+                        .chat-bot-conversation-panel{height:400px;overflow:auto;}
+                        .chat-bot-conversation-panel .from-bot{margin-top:1rem;color:#FFF;font-size: 14px;min-height: 40px;background: #4bca81;max-width: 80%;border-radius: 5px;padding: 10px;float:left;}
+                        .chat-bot-conversation-panel .from-user{margin-top:1rem;color:#16325c;font-size: 14px;min-height: 40px;background: #f7f9fb;max-width: 80%;border-radius: 5px;padding: 10px;float:right;}
+                        .chat-bot-conversation-panel .your-name, .chat-bot-conversation-panel .bot-name{font-weight:300;}
+                        
+                        .chat-bot-messaging-panel .slds-form-element__control svg{right:10px;cursor:pointer;}
+                        
+                        .chat-minimize{right:0;top: 0;margin-right: 10px;cursor: pointer;}
+                    </style>
+                    <div class="slds-is-fixed chat-bot-container slds-hide minimize-it slds-form">
+                        <div class="chat-bot-topbar slds-is-relative">
+                            <div class="slds-clearfix">
+                                <div class="smart_bot chat_type_handle slds-float--left selected slds-p-horizontal--medium" style="width:45%">
+                                    <span class="slds-icon_container">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                            <use xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#chat"></use>
+                                        </svg>
+                                    </span>
+                                    <span class="chat-type-title">Smart Bot</span>
+                                </div>
+                                <div class="sfdc_chat chat_type_handle slds-float--left slds-p-horizontal--medium" style="width:45%">
+                                    <span class="slds-icon_container">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                            <use xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#chat"></use>
+                                        </svg>
+                                    </span>
+                                    <span class="chat-type-title">Chat</span>
+                                </div>
+                            </div>
+                            <div class="slds-is-absolute chat-minimize">
+                                <span class="slds-icon_container">
+                                    <svg aria-hidden="true" class="slds-icon slds-icon-text-default slds-icon--x-small">
+                                        <use xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#dash"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="chat_panel chat-bot-conversation-panel slds-p-around--small" id="response"></div>
+                        <div class="chat_panel chat-bot-conversation-panel-sfdc slds-p-around--small slds-hide">
+                            <div id="lightningBot"/>
+                        </div>
+                        <div class="chat-bot-messaging-panel slds-p-horizontal--small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+                                    <svg aria-hidden="true" class="slds-input__icon slds-icon-text-default" id="rec" onclick="return false;">
+                                        <use xlink:href="/resource/assets/assets/icons/utility-sprite/svg/symbols.svg#unmuted"></use>
+                                    </svg>
+                                    <input id="input" class="slds-input" type="text" aria-autocomplete="list" role="combobox" aria-expanded="true" aria-activedescendant="" />
+                                </div>
+                            </div>
+                        </div>
+                        <!--
+<button id="rec" class="slds-button slds-button--neutral slds-button--brand" onclick="return false;">Speak</button>
+<br/>Response<br/>
+<textarea id="response" cols="40" rows="2"></textarea>-->
+                    </div>  
+                </div> <!-- Main Container -->
+                
+                <!-- Modal HTML -->
+                
+                <div id="cn-modal" aria-hidden="true" tabindex="-1" role="dialog" aria-labelledby="modal-heading" class="slds-modal slds-fade-in-open slds-hide">
+                    <div class="slds-modal__container">
+                        <apex:outputPanel id="callNoteModal" layout="block">
+                            <div class="slds-modal__header">
+                                <h2 id="modal-heading" class="slds-text-heading--medium">{!meetingName}</h2>
+                                <button class="slds-button slds-button--icon-inverse slds-modal__close" data-aljs-dismiss="modal">
+                                    <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Resource.assets,'assets/icons/action-sprite/svg/symbols.svg#close')}"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                            </div>
+                            <div class="slds-modal__content slds-p-around--medium">
+                                <div class="slds-grid slds-wrap">
+                                    
+                                    <div class="slds-size--12-of-12">
+                                        <div class="slds-form-element slds-p-horizontal--x-small">
+                                            <label class="slds-form-element__label" for="acc-comm-ip">Meeting Summary</label>
+                                            <div class="slds-form-element__control">
+                                                <apex:inputField value="{!callNote.Comments__c}" id="acc-comm-ip" styleClass="slds-textarea"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size--12-of-12">
+                                        <div class="slds-form-element slds-p-horizontal--x-small">
+                                            <label class="slds-form-element__label" for="acc-actit-ip">Action Items</label>
+                                            <div class="slds-form-element__control">
+                                                <apex:inputField value="{!callNote.Action_Items__c}" id="acc-actit-ip" styleClass="slds-textarea"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        <div class="slds-modal__footer">
+                            <button class="slds-button slds-button--neutral" data-aljs-dismiss="modal">Cancel</button>
+                            <apex:commandButton action="{!createCallNote}" styleclass="slds-button slds-button--neutral slds-button--brand" html-data-aljs-dismiss="modal" value="Save" rerender="callNotesList"/>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- End Modal HTML -->
+                <apex:actionFunction name="showChecklist" action="{!refreshCheckList}" rerender="checklistBlock" oncomplete="focusToChecklist();">
+                    <apex:param name="selectOpp" value="" assignTo="{!selectedOpp}"/>
+                </apex:actionFunction>
+                <apex:actionFunction name="createNewContact1" action="{!URLFOR($Action.Contact.NewContact)}" rerender="null"/>
+                <apex:actionFunction name="newOpportunity" action="{!URLFOR($Action.Opportunity.New)}" rerender="null"/>
+                <apex:actionFunction name="createCase" action="{!URLFOR($Action.Case.NewCase)}" rerender="null"/>
+                <apex:actionFunction name="createTask" action="{!URLFOR($Action.Task.NewTask)}" rerender="null"/>
+                <apex:actionFunction name="createMeeting" action="{!URLFOR($Action.Event.NewEvent)}" rerender="null"/>
+                <apex:actionFunction name="createObligation" action="{!URLFOR($Action.Obligation__c.new)}" rerender="null"/>
+                <apex:actionFunction name="createDeposit" action="{!URLFOR($Action.Deposit__c.new)}" rerender="null"/>
+                
+                <apex:actionFunction name="showCallNoteModal" action="{!showCallNoteModal}" reRender="callNoteModal">
+                    <apex:param name="parentMeetingName" value="" assignTo="{!parentMeetingId}"/>
+                    <apex:param name="meetingDetailName" value="" assignTo="{!meetingName}"/>
+                    <apex:param name="meetingDateTimeText" value="" assignTo="{!meetingDateTime}"/>
+                </apex:actionFunction>
+                <apex:actionFunction name="createCallNote" action="{!createCallNote}" rerender="null" oncomplete="modalClose();"/>
+            </apex:form>
+            <apex:includeScript value="{!URLFOR($Resource.assets,'assets/scripts/jquery.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.assets,'assets/scripts/moment.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.assets,'assets/scripts/jquery.aljs-all.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.assets,'assets/scripts/highcharts.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.custom,'custom/js/script.js')}"/>
+            <script>
+            var data1 = [{!data1}];
+            var data2 = [{!data2}];
+            var data3 = [{!data3}];
+            var data4 = [{!data4}];
+            var data5 = [{!data5}];
+            var data6 = [{!data6}];
+            console.log('{!companyNameList}'.length);
+            console.log('=======');
+            // Value Alignment Highchart implementation.
+            Highcharts.chart('va-chart', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Services'
+                },
+                xAxis: {
+                    categories: ['Treasury', 'Price', 'Structure', 'Corp Finance/M&A', 'Global Markets/FX/IRD']
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: '{!companyName}',
+                    color: '#434348',
+                    data: data1
+                }, {
+                    name: '{!competitorName1 }',
+                    color: '#7cb5ec',
+                    data: data2
+                }, {
+                    name: '{!competitorName2}',
+                    color: '#FF8F33',
+                    data: data5
+                }]
+                
+            });
+            
+            // Value Alignment Highchart implementation.
+            Highcharts.chart('va-chart1', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Products'
+                },
+                xAxis: {
+                    categories: ['Mortgage Loans', 'Money Market Accounts', 'Business Loans', 'High yield account', 'Business Checking & Savings']
+                },
+                credits: {
+                    enabled: false
+                },
+                
+                series: [{
+                    name: '{!companyName}',
+                    color: '#434348',
+                    data: data3
+                }, {
+                    name: '{!competitorName1 }',
+                    color: '#7cb5ec',
+                    data: data4
+                }, {
+                    name: '{!competitorName2}',
+                    color: '#FF8F33',
+                    data: data6
+                }]
+            });
+            
+            function createNewContact()
+            {
+                sforce.one.createRecord('Contact','012630000000SzTAAU','{AccountId:!Account.Id}');
+            }
+            function openAccountPlan()
+            {
+                
+                if('{!accPlanId}' != null && '{!accPlanId}' != '')
+                {                
+                    var url = "/apex/AccountPage_UX?id="+'{!accPlanId}'+"&accountId="+'{!account.Id}';
+                    sforce.one.navigateToURL(url);
+                }
+                else{
+                    var url = "/apex/AccountPage_UX?accountId="+'{!account.Id}';
+                    sforce.one.navigateToURL(url);
+                }
+            }
+            
+            function openLightningURL(recId)
+            {
+                sforce.one.navigateToURL("/"+recId);
+                
+            }
+            
+            // Script for modal.
+            $(document).ready(function() {
+                $('[data-aljs="modal"]').modal();
+                var allTabs = $(".site-tab .site-tab--header > h2:visible");
+                if(allTabs.length > 0){
+                    for(var i=0, iLen = allTabs.length; i< iLen; i++){
+                        if($(allTabs[i]).is(":visible")){
+                            $(allTabs[i]).trigger("click");
+                            break;
+                        }
+                    }
+                }
+            });
+            
+            // Check if submitted and close modal.
+            function modalClose() {
+                
+            }
+            
+            function focusToChecklist(){
+                $('html,body').animate({
+                    scrollTop: $(document).height(),
+                    scrollLeft: 0
+                }, 800, function(){
+                    $('html,body').clearQueue();
+                });
+            }
+            </script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+            <script type="text/javascript">
+            
+            var accessToken = "f70466a874da49d9a8bb635c4f1f9089";
+            var baseUrl = "https://api.api.ai/v1/";
+            var accountid = '{!account.Id}';//"0016300000KZm66AAD";
+            $(document).ready(function() {
+                $("#input").keypress(function(event) {
+                    if (event.which == 13) {
+                        event.preventDefault();
+                        send();
+                    }
+                });
+                $("#rec").click(function(event) {
+                    switchRecognition();
+                });
+                
+                $(".chat-minimize").on("click", function(){
+                    $(".chat-bot-container").toggleClass("minimize-it");
+                });
+                
+                $(".smart_bot").on("click", function(){
+                    $(".chat_type_handle").removeClass("selected");
+                    $(this).addClass("selected");
+                    $(".chat_panel").addClass("slds-hide");
+                    $(".chat-bot-conversation-panel").removeClass("slds-hide");
+                    $(".chat-bot-messaging-panel").removeClass("slds-hide");
+                    
+                    $(".chat-bot-container").removeClass("minimize-it");
+                });
+                
+                $(".sfdc_chat").on("click", function(){
+                    $(".chat_type_handle").removeClass("selected");
+                    $(this).addClass("selected");
+                    $(".chat_panel").addClass("slds-hide");
+                    $(".chat-bot-conversation-panel-sfdc").removeClass("slds-hide");
+                    $(".chat-bot-messaging-panel").addClass("slds-hide");
+                    
+                    $(".chat-bot-container").removeClass("minimize-it");
+                });
+            });
+            
+            var recognition;
+            
+            function startRecognition() {
+                recognition = new webkitSpeechRecognition();
+                console.log("1..."+recognition)
+                recognition.onstart = function(event) {
+                    updateRec();
+                };
+                recognition.onresult = function(event) {
+                    console.log("6..."+recognition);
+                    var text = "";
+                    for (var i = event.resultIndex; i < event.results.length; ++i) {
+                        text += event.results[i][0].transcript;
+                    }
+                    setInput(text);
+                    stopRecognition();
+                };
+                recognition.onend = function() {
+                    console.log("7..."+recognition);
+                    stopRecognition();
+                };
+                recognition.lang = "en-US";
+                recognition.start();
+                console.log("2..."+recognition)
+            }
+            
+            function stopRecognition() {
+                console.log("3..."+recognition)
+                if (recognition) {
+                    recognition.stop();
+                    recognition = null;
+                    console.log("4..."+recognition)
+                }
+                updateRec();
+            }
+            
+            function switchRecognition() {
+                if (recognition) {
+                    stopRecognition();
+                } else {
+                    startRecognition();
+                }
+            }
+            
+            function setInput(text) {
+                $("#input").val(text);
+                send();
+            }
+            
+            function updateRec() {
+                console.log("5..."+recognition)
+                //$("#rec").text(recognition ? "Stop" : "Speak");
+            }
+            
+            function send() {
+                var text = $("#input").val();
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "query?v=20150910",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    headers: {
+                        "Authorization": "Bearer " + accessToken
+                    },
+                    data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+                    
+                    success: function(data) {
+                        //setResponse(JSON.stringify(data, undefined, 2));
+                        var resText = data["result"]["fulfillment"]["speech"];
+                        if(resText=="Mention accountId"){
+                            var temptext = accountid;
+                            $.ajax({
+                                type: "POST",
+                                url: baseUrl + "query?v=20150910",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                headers: {
+                                    "Authorization": "Bearer " + accessToken
+                                },
+                                data: JSON.stringify({ query: temptext, lang: "en", sessionId: "somerandomthing" }),
+                                
+                                success: function(data) {
+                                    //console.log("Account Id Sent....");
+                                    setResponse(data["result"]["fulfillment"]["speech"]);
+                                    responsiveVoice.speak(data["result"]["fulfillment"]["speech"]);
+                                },
+                                error: function() {
+                                    //setResponse("Internal Server Error");
+                                    console.log("Error encountered while setting account id.....");
+                                }
+                            });
+                            
+                        }else{
+                            setResponse(data["result"]["fulfillment"]["speech"]);
+                            responsiveVoice.speak(data["result"]["fulfillment"]["speech"]);
+                        }
+                        
+                        
+                    },
+                    error: function() {
+                        setResponse("Internal Server Error");
+                    }
+                });
+                
+                //setResponse("Loading...");
+                
+                $("#input").val("");
+                setResponse(text, "user");
+            }
+            
+            function setResponse(val, msgFrom) {
+                var cssClassName = msgFrom === "user" ? "from-user" : "from-bot";
+                var userName = msgFrom === "user" ? "<span class='your-name'>You :</span>" : "<span class='bot-name'>Bot :</span>";
+                $("#response").append('<div class="slds-clearfix"><div class="'+cssClassName+'">'+val+'</div></div>');
+            }
+            function setResponseInfo(val) {
+                $("#response").text(val);
+            }
+            
+            </script>
+        </body>
+    </html>
+    
+</apex:page>

@@ -1,0 +1,14 @@
+<apex:page >
+    <apex:includeScript value="/support/console/40.0/integration.js"/>
+    <A HREF="#" onClick="testGenerateConsoleURL();return false">
+        Click here to generate a console URL</A> 
+
+    <script type="text/javascript">
+        function showConsoleUrl(result) {
+            alert(result.consoleUrl);
+         }
+        function testGenerateConsoleURL() {
+            sforce.console.generateConsoleUrl(['/apex/AccountPage'], showConsoleUrl);
+        }
+    </script>
+</apex:page>

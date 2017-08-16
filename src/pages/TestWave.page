@@ -1,0 +1,7 @@
+<apex:page >
+<wave:dashboard dashboardId="0FK630000004CiXGAU" 
+        showTitle="false" 
+        height="800px" 
+        openLinksInNewWindow="false" 
+        filter="{'datasets':{'RM_Wave_Datset':[{'fields':['RM'], 'filter':{'operator': 'matches', 'values':['Bruce Walker']}}]}}"/>
+</apex:page>

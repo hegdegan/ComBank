@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Amort term (months) --></label>
+        <name>Adi_Amort_term__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ant funding amt --></label>
+        <name>Adi_Ant_funding_amt__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approval date --></label>
+        <name>Adi_Approval_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client name --></label>
+        <name>Adi_Client_name__c</name>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Closing date --></label>
+        <name>Adi_Closing_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Collateral address --></label>
+        <name>Adi_Collateral_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Commitment Amount --></label>
+        <name>Adi_Commitment_Amt__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dead deal date --></label>
+        <name>Adi_Dead_deal_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division manager --></label>
+        <name>Adi_Div_manager__c</name>
+    </fields>
+    <fields>
+        <help><!-- Test Picklist --></help>
+        <label><!-- IO --></label>
+        <name>Adi_IO__c</name>
+        <picklistValues>
+            <masterLabel>IO</masterLabel>
+            <translation><!-- IO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Test Number --></help>
+        <label><!-- IO term (months) --></label>
+        <name>Adi_IO_term__c</name>
+    </fields>
+    <fields>
+        <label><!-- Include in forecast --></label>
+        <name>Adi_Include_in_forecast__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Test Picklist --></help>
+        <label><!-- Index rate --></label>
+        <name>Adi_Index_rate__c</name>
+        <picklistValues>
+            <masterLabel>Line of Credit</masterLabel>
+            <translation><!-- Line of Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Revolving Line of Credit</masterLabel>
+            <translation><!-- Revolving Line of Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Term Loan</masterLabel>
+            <translation><!-- Term Loan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Law firm assigned --></label>
+        <name>Adi_Law_firm_assigned__c</name>
+    </fields>
+    <fields>
+        <help><!-- Test Number --></help>
+        <label><!-- Loan number --></label>
+        <name>Adi_Loan_number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Loan purpose --></label>
+        <name>Adi_Loan_purpose__c</name>
+        <picklistValues>
+            <masterLabel>Acquisition</masterLabel>
+            <translation><!-- Acquisition --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Buyout</masterLabel>
+            <translation><!-- Buyout --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Capital Distribution</masterLabel>
+            <translation><!-- Capital Distribution --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Construction</masterLabel>
+            <translation><!-- Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extension</masterLabel>
+            <translation><!-- Extension --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Extension of Construction</masterLabel>
+            <translation><!-- Extension of Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Increase &amp; Extension</masterLabel>
+            <translation><!-- Increase &amp; Extension --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refinance</masterLabel>
+            <translation><!-- Refinance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal</masterLabel>
+            <translation><!-- Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Replace Guarantor</masterLabel>
+            <translation><!-- Replace Guarantor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Working Capital</masterLabel>
+            <translation><!-- Working Capital --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Loan status --></label>
+        <name>Adi_Loan_status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dead Deal</masterLabel>
+            <translation><!-- Dead Deal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Underwriting</masterLabel>
+            <translation><!-- In Underwriting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pay-Down</masterLabel>
+            <translation><!-- Pay-Down --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pay-Off</masterLabel>
+            <translation><!-- Pay-Off --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Term Sheet Issued</masterLabel>
+            <translation><!-- Term Sheet Issued --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Test Number --></help>
+        <label><!-- Loan term (months) --></label>
+        <name>Adi_Loan_term__c</name>
+    </fields>
+    <fields>
+        <label><!-- Loan type --></label>
+        <name>Adi_Loan_type__c</name>
+        <picklistValues>
+            <masterLabel>Line of Credit</masterLabel>
+            <translation><!-- Line of Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Revolving Line of Credit</masterLabel>
+            <translation><!-- Revolving Line of Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Term Loan</masterLabel>
+            <translation><!-- Term Loan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Test Percent --></help>
+        <label><!-- Oigination fee (%) --></label>
+        <name>Adi_Oigination_fee__c</name>
+    </fields>
+    <fields>
+        <help><!-- Test Currency --></help>
+        <label><!-- Origination fee ($) --></label>
+        <name>Adi_Origination_fee__c</name>
+    </fields>
+    <fields>
+        <help><!-- Test Currency --></help>
+        <label><!-- Pay-off/pay-down amt --></label>
+        <name>Adi_Payoff_paydown_amt__c</name>
+    </fields>
+    <fields>
+        <help><!-- Test Date --></help>
+        <label><!-- Pay-off/pay-down date --></label>
+        <name>Adi_Payoff_paydown_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Test Currency --></help>
+        <label><!-- Pre-payment penalty --></label>
+        <name>Adi_Prepayment_penalty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product type --></label>
+        <name>Adi_Product_type__c</name>
+        <picklistValues>
+            <masterLabel>ABL (LOC)</masterLabel>
+            <translation><!-- ABL (LOC) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CRE - Other</masterLabel>
+            <translation><!-- CRE - Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Construction</masterLabel>
+            <translation><!-- Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Equipment</masterLabel>
+            <translation><!-- Equipment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Land</masterLabel>
+            <translation><!-- Land --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lease/Loan</masterLabel>
+            <translation><!-- Lease/Loan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multi-Family</masterLabel>
+            <translation><!-- Multi-Family --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NON-ABL (LOC)</masterLabel>
+            <translation><!-- NON-ABL (LOC) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Operating Lease</masterLabel>
+            <translation><!-- Operating Lease --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Owner Occupied</masterLabel>
+            <translation><!-- Owner Occupied --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Revolving Line of Credit</masterLabel>
+            <translation><!-- Revolving Line of Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SNC</masterLabel>
+            <translation><!-- SNC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Secured LOC</masterLabel>
+            <translation><!-- Secured LOC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>T/E C&amp;I</masterLabel>
+            <translation><!-- T/E C&amp;I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>T/E CRE</masterLabel>
+            <translation><!-- T/E CRE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>T/E Lease</masterLabel>
+            <translation><!-- T/E Lease --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unsecured LOC</masterLabel>
+            <translation><!-- Unsecured LOC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unsecured Revolving LOC</masterLabel>
+            <translation><!-- Unsecured Revolving LOC --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Test Picklist --></help>
+        <label><!-- Rate type --></label>
+        <name>Adi_Rate_type__c</name>
+        <picklistValues>
+            <masterLabel>Fixed</masterLabel>
+            <translation><!-- Fixed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Variable</masterLabel>
+            <translation><!-- Variable --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Relationship manager --></label>
+        <name>Adi_Relationship_manager__c</name>
+        <relationshipLabel><!-- Opportunities (Relationship manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Test Percent --></help>
+        <label><!-- Spread (%) --></label>
+        <name>Adi_Spread__c</name>
+    </fields>
+    <fields>
+        <help><!-- Test Date --></help>
+        <label><!-- Submitted to underwriting date --></label>
+        <name>Adi_Submitted_to_underwriting_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Swap --></label>
+        <name>Adi_Swap__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Team --></label>
+        <name>Adi_Team__c</name>
+    </fields>
+    <fields>
+        <label><!-- Team leader --></label>
+        <name>Adi_Team_leader__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Adi_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Underwriter --></label>
+        <name>Adi_Underwriter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Age --></label>
+        <name>Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount --></label>
+        <name>Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auto reinvest --></label>
+        <name>Auto_reinvest__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Tax Returns --></label>
+        <name>Business_Tax_Returns__c</name>
+    </fields>
+    <fields>
+        <label><!-- Capital Allocation and Approvals --></label>
+        <name>Capital_Allocation_and_Approvals__c</name>
+    </fields>
+    <fields>
+        <label><!-- End date --></label>
+        <name>End_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Inbound Client/Credit at RBS NV --></label>
+        <name>Inbound_Client_Credit_at_RBS_NV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Insurance Certificate --></label>
+        <name>Insurance_Certificate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest reinvest --></label>
+        <name>Interest_reinvest__c</name>
+    </fields>
+    <fields>
+        <label><!-- NumberOfProducts --></label>
+        <name>NumberOfProducts__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Age --></label>
+        <name>Opportunity_Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Overall Age --></label>
+        <name>Overall_Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period --></label>
+        <name>Period__c</name>
+        <picklistValues>
+            <masterLabel>0 - 30 days</masterLabel>
+            <translation><!-- 0 - 30 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>31 - 90 days</masterLabel>
+            <translation><!-- 31 - 90 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>91 - 180 days</masterLabel>
+            <translation><!-- 91 - 180 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Above 180 days</masterLabel>
+            <translation><!-- Above 180 days --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Primary Contact --></label>
+        <name>Primary_Contact__c</name>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Product__c</name>
+        <picklistValues>
+            <masterLabel>Cards</masterLabel>
+            <translation><!-- Cards --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deposits</masterLabel>
+            <translation><!-- Deposits --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Derivatives</masterLabel>
+            <translation><!-- Derivatives --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FX</masterLabel>
+            <translation><!-- FX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loans</masterLabel>
+            <translation><!-- Loans --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Property Reports --></label>
+        <name>Property_Reports__c</name>
+    </fields>
+    <fields>
+        <help>Référence à votre contrat amendé.</help>
+        <label><!-- Amended Contract --></label>
+        <name>SBQQ__AmendedContract__c</name>
+        <relationshipLabel><!-- Amendment Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>Salesforce CPQ utilise ce champ pour convertir automatiquement les ressources et les abonnements.</help>
+        <label><!-- Contracted --></label>
+        <name>SBQQ__Contracted__c</name>
+    </fields>
+    <fields>
+        <help>Sélectionnez cette case pour créer des prix contractés sans créer de contrat.</help>
+        <label><!-- Create Contracted Prices --></label>
+        <name>SBQQ__CreateContractedPrices__c</name>
+    </fields>
+    <fields>
+        <help>Salesforce CPQ l&apos;utilise pour pointer vers le devis principal de cette opportunité.</help>
+        <label><!-- Primary Quote --></label>
+        <name>SBQQ__PrimaryQuote__c</name>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quote Pricebook Id --></label>
+        <name>SBQQ__QuotePricebookId__c</name>
+    </fields>
+    <fields>
+        <help>Indique que cette opportunité est un renouvellement.</help>
+        <label><!-- Renewal --></label>
+        <name>SBQQ__Renewal__c</name>
+    </fields>
+    <fields>
+        <help>Contrat renouvelé par cette opportunité de renouvellement. Si les contrats sont cumulés dans cette opportunité, il pointe vers le contrat principal.</help>
+        <label><!-- Renewed Contract --></label>
+        <name>SBQQ__RenewedContract__c</name>
+        <relationshipLabel><!-- Renewal Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Stage changed date --></label>
+        <name>Stage_changed_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tax Assessment --></label>
+        <name>Tax_Assessment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value Proposition --></label>
+        <name>Value_Proposition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Rate --></label>
+        <name>Yield_Rate__c</name>
+    </fields>
+    <quickActions>
+        <label><!-- New Quote --></label>
+        <name>Create_New_Quote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Start Onboarding --></label>
+        <name>Start_Onboarding</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Loan --></label>
+        <name>Loan</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Please get the products configured before proceeding to the next stage --></errorMessage>
+        <name>AddProductsBeforeIMReveiw</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please capture value proposition before proceeding to the next stage --></errorMessage>
+        <name>capture_Value_Proposition</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Amend_Contract --></label>
+        <name>SBQQ__Amend_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- CreateOrder --></label>
+        <name>SBQQ__CreateOrder</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Include_Document --></label>
+        <name>SBQQ__Include_Document</name>
+    </webLinks>
+    <workflowTasks>
+        <description><!-- Yield rate is finalised by the Product Manager, Kindly create a quote and proceed ahead --></description>
+        <name>Changed_Yield_Rate</name>
+        <subject><!-- Interest Rate Finalised --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Checklist_completed_for_opportunity</name>
+        <subject><!-- Checklist completed for Opportunity --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Configure_Products</name>
+        <subject><!-- Configure Products --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Please start with products servicing. --></description>
+        <name>Service_Product</name>
+        <subject><!-- Commence Products Servicing --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Test. --></description>
+        <name>Test_Task</name>
+        <subject><!-- Test Task --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

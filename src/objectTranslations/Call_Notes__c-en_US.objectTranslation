@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Call Notes</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Call Notes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Action Items --></label>
+        <name>Action_Items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Activity Id --></label>
+        <name>Activity_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Meeting Date --></label>
+        <name>Meeting_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Meeting time --></label>
+        <name>Meeting_time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Summary of Competitor --></label>
+        <name>Summary_of_Competitor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Summary of Opportunity --></label>
+        <name>Summary_of_Opportunity__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>
